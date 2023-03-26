@@ -3,7 +3,14 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState(() => {
+    const savedTodoList = localStorage.getItem("todoList");
+    if (savedTodoList) {
+      return JSON.parse(savedTodoList);
+    } else {
+      return [];
+    }
+  });
   const [inputValue, setInputValue] = useState("");
   const [day, setDay] = useState("");
   const [date, setDate] = useState(new Date());
@@ -43,13 +50,33 @@ function App() {
       setDay(day);
       setDate(new Date());
     }, 1000);
+
+    // Load saved todo list from local storage
+
     return () => clearInterval(interval);
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTodoList([...todoList, inputValue]);
+    setTodoList([...todoList, { text: inputValue, completed: false }]);
     setInputValue("");
+  };
+
+  // Save todo list to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
+
+  const handleDelete = (index) => {
+    const newTodoList = [...todoList];
+    newTodoList.splice(index, 1);
+    setTodoList(newTodoList);
+  };
+
+  const handleComplete = (index) => {
+    const newTodoList = [...todoList];
+    newTodoList[index].completed = !newTodoList[index].completed;
+    setTodoList(newTodoList);
   };
 
   return (
@@ -82,8 +109,39 @@ function App() {
         </form>
         <ul>
           {todoList.map((todo, index) => (
-            <li key={index} className="text-[#b3c7d6]">
-              {todo}
+            <li
+              key={index}
+              className={`text-[#b3c7d6] ${
+                todo.completed ? "line-through" : ""
+              }`}
+            >
+              <input
+                type="checkbox"
+                className="mr-2"
+                checked={todo.completed}
+                onChange={() => handleComplete(index)}
+              />
+
+              {todo.text}
+
+              <button className="ml-2" onClick={() => handleDelete(index)}>
+                <div className="h-4">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 -4 26 26"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-auto h-full"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                    />
+                  </svg>
+                </div>
+              </button>
             </li>
           ))}
         </ul>
