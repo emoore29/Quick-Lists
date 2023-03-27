@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import Clock from "react-clock";
 import "./App.css";
 
 function App() {
@@ -12,8 +12,7 @@ function App() {
     }
   });
   const [inputValue, setInputValue] = useState("");
-  const [day, setDay] = useState("");
-  const [date, setDate] = useState(new Date());
+  const [value, setValue] = useState(new Date());
 
   const days = [
     "Sunday",
@@ -40,20 +39,20 @@ function App() {
     "December",
   ];
 
+  const d = new Date();
+  const day = days[d.getDay()];
+  const date = d.getDate();
+  const year = d.getFullYear();
+  const month = months[d.getMonth()];
+
+  const stringDate = date + " " + month + " " + year;
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      const d = new Date();
-      const day = days[d.getDay()];
-      const year = d.getFullYear();
-      const date = d.getDate();
-      const month = months[d.getMonth()];
-      setDay(day);
-      setDate(new Date());
-    }, 1000);
+    const interval = setInterval(() => setValue(new Date()), 1000);
 
-    // Load saved todo list from local storage
-
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
 
   const handleSubmit = (e) => {
@@ -80,72 +79,83 @@ function App() {
   };
 
   return (
-    <div className="bg-[#0f172a] h-1/2 w-1/2 p-5 grid grid-cols-2 text-left">
-      <div>
-        <section id="header" className="mb-12">
-          <h1 className="text-7xl text-[#f1f1f1]">{day}</h1>
-          <p className="text-[#b3c7d6]">{date.toLocaleString()}</p>
+    <div className="bg-[#0f172a] h-7/12 w-fit p-5">
+      <div className="grid grid-cols-3 text-left items-center">
+        <section id="header" className="col-span-2 row-span-1">
+          <h1 className="text-7xl text-[#f1f1f1] relative bottom-4">
+            {day}, <span className="text-[2rem]">{stringDate}</span>
+          </h1>
         </section>
-        <section id="schedule" className="text-[#b3c7d6]">
+
+        <Clock
+          className="justify-self-end"
+          renderMinuteMarks={false}
+          value={value}
+        />
+      </div>
+      <div className="flex mt-12 justify-between">
+        <section id="schedule" className="text-[#b3c7d6] text-left">
           <h2>Work Availability</h2>
           <ScheduleTable />
         </section>
-      </div>
-      <section id="todo" className="justify-self-end">
-        <h1 className="text-[#b3c7d6]">To Do</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            className="bg-[#b3c7d6] text-gray-800 rounded"
-            type="text"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
-          <button
-            type="submit"
-            class="text-center bg-[#8db596] rounded px-2 ml-2 mr-2 mb-2 text-gray-800"
-          >
-            +
-          </button>
-        </form>
-        <ul>
-          {todoList.map((todo, index) => (
-            <li
-              key={index}
-              className={`text-[#b3c7d6] ${
-                todo.completed ? "line-through" : ""
-              }`}
+
+        <section id="todo" className="justify-self-end col-start-3 text-left">
+          <h1 className="text-[#b3c7d6]">To do:</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              className="bg-[#b3c7d6] text-gray-800 rounded"
+              type="text"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="text-center bg-[#8db596] rounded px-2 ml-2 mr-2 mb-2 text-gray-800"
             >
-              <input
-                type="checkbox"
-                className="mr-2 default:bg-green-500"
-                checked={todo.completed}
-                onChange={() => handleComplete(index)}
-              />
+              +
+            </button>
+          </form>
 
-              {todo.text}
+          <ul>
+            {todoList.map((todo, index) => (
+              <li
+                key={index}
+                className={`text-[#b3c7d6] ${
+                  todo.completed ? "line-through" : ""
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  className="mr-2 default:bg-green-500"
+                  checked={todo.completed}
+                  onChange={() => handleComplete(index)}
+                />
 
-              <button className="ml-2" onClick={() => handleDelete(index)}>
-                <div className="h-4">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 -4 26 26"
-                    strokeWidth={1.5}
-                    stroke="currentColor"
-                    className="w-auto h-full"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                    />
-                  </svg>
-                </div>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </section>
+                {todo.text}
+
+                <button className="ml-2" onClick={() => handleDelete(index)}>
+                  <div className="h-4">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 -4 26 26"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-auto h-full"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                      />
+                    </svg>
+                  </div>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      </div>
     </div>
   );
 }
@@ -184,22 +194,36 @@ const scheduleData = [
 ];
 
 function ScheduleTable() {
-  const [showPerthTime, setShowPerthTime] = useState(true);
+  const [timezone, setTimezone] = useState("UTC+8");
 
-  const toggleTimezone = () => {
-    setShowPerthTime((prev) => !prev);
+  const handleToggle = () => {
+    setTimezone(timezone === "UTC+1" ? "UTC+8" : "UTC+1");
   };
 
   return (
     <div className="text-[#b3c7d6]">
-      <button onClick={toggleTimezone}>
-        Show {showPerthTime ? "Swiss" : "Perth"} time
-      </button>
+      <div className="flex items-center">
+        <span className="mr-2">Timezone:</span>
+        <button
+          className={`relative inline-flex flex-shrink-0 h-6 w-12 border-2 border-gray-400 rounded-full cursor-pointer transition-colors ease-in-out duration-200 ${
+            timezone === "UTC+8" ? "bg-gray-400" : "bg-gray-200"
+          }`}
+          onClick={handleToggle}
+        >
+          <span className="sr-only">Toggle timezone</span>
+          <span
+            className={`inline-block h-5 w-5 rounded-full bg-white transform transition ease-in-out duration-200 ${
+              timezone === "UTC+8" ? "translate-x-0" : "translate-x-6"
+            }`}
+          />
+        </button>
+        <span className="ml-2">{timezone}</span>
+      </div>
       <table>
         <thead>
           <tr>
             <th>Day</th>
-            <th>{showPerthTime ? "Perth time" : "Swiss time"}</th>
+            <th>{timezone === "UTC+8" ? "Perth time" : "Swiss time"}</th>
           </tr>
         </thead>
         <tbody>
@@ -207,7 +231,7 @@ function ScheduleTable() {
             <tr key={scheduleItem.day}>
               <td className="pr-5">{scheduleItem.day}</td>
               <td>
-                {showPerthTime
+                {timezone === "UTC+8"
                   ? scheduleItem.perthTime
                   : scheduleItem.swissTime}
               </td>

@@ -1,3 +1,5 @@
+@import "react-clock/dist/Clock.css";
+
 body {
   padding: 0;
   width: 100vw;
@@ -51,4 +53,8 @@ body {
 
 .read-the-docs {
   color: #888;
+}
+
+.react-clock__second-hand__body {
+  background-color: #f0e9d8 !important;
 }
