@@ -91,7 +91,7 @@ function App() {
           <ScheduleTable />
         </section>
       </div>
-      <section id="todo">
+      <section id="todo" className="justify-self-end">
         <h1 className="text-[#b3c7d6]">To Do</h1>
         <form onSubmit={handleSubmit}>
           <input
@@ -117,7 +117,7 @@ function App() {
             >
               <input
                 type="checkbox"
-                className="mr-2"
+                className="mr-2 default:bg-green-500"
                 checked={todo.completed}
                 onChange={() => handleComplete(index)}
               />
