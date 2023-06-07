@@ -3,15 +3,12 @@ import Clock from "react-clock";
 import "./App.css";
 import Routine from "./components/routine";
 import Todo from "./components/todo";
+import List from "./components/list"
 
 function App() {
-
-  
   // value = current date and time
   const [dateTime, setDateTime] = useState(new Date());
 
-  
-  
   const days = [
     "Sunday",
     "Monday",
@@ -56,22 +53,24 @@ function App() {
 
   return (
     <div className="bg-[#93415c] h-full p-5">
-      <div className="grid grid-cols-3 text-left items-center">
-        <section id="header" className="col-span-2 row-span-1">
+      <div className="">
+        <section id="header" className="mb-20">
           <h1 className="text-7xl text-black relative bottom-4">
             {day}, <span className="text-[2rem]">{dateString}</span>
           </h1>
+          <h1 className="absolute top-0 right-0 text-3xl p-5 text-black">{dateTime.toLocaleTimeString()}</h1>
         </section>
-        <Clock
-          className="justify-self-end"
+        {/* <Clock
+          className=""
           renderMinuteMarks={false}
           renderSecondHand={false}
           value={dateTime}
-        />
+        /> */}
       </div>
-      <div className="flex mt-12">
-        <Routine />
-        <Todo />
+      <div className="flex mt-12 justify-center gap-20">
+        <List listName="Await" />
+        <List listName="Routine" />
+        <List listName="To do" />
       </div>
     </div>
   );

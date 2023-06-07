@@ -14,14 +14,14 @@ export default function Todo() {
     const [todoInput, setTodoInput] = useState("");
   
   
-    // Saves list to local storage whenever it changes
+    // Adds new item to list
     const handleSubmit = (e) => {
       e.preventDefault();
       setTodoList([...todoList, { text: todoInput, completed: false }]);
       setTodoInput("");
     };
   
-    // Save list to local storage whenever it changes
+    // Saves list to local storage whenever it changes
     useEffect(() => {
       localStorage.setItem("todoList", JSON.stringify(todoList));
     }, [todoList]);
@@ -62,12 +62,12 @@ export default function Todo() {
               <li
                 key={index}
                 className={`text-black ${
-                  item.completed ? "line-through" : ""
+                  item.completed && "line-through"
                 }`}
               >
                 <input
                   type="checkbox"
-                  className="mr-2 bg-[#c8839a]-100 border-0 rounded-md text-[#9ffff3]-500 focus:ring-0"
+                  className="mr-2 bg-[#c8839a]-100 border-0 rounded-md text-[#9ffff3]-500 focus:ring-0 focus:ring-offset-0"
                   checked={item.completed}
                   onChange={() => handleComplete(index)}
                 />

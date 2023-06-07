@@ -1,59 +1,57 @@
 import { useState, useEffect } from "react";
 
-export default function Routine() {
-  const [routine, setRoutine] = useState(() => {
-    const savedRoutine = localStorage.getItem("routine");
-    if (savedRoutine) {
-      return JSON.parse(savedRoutine);
-    } else {
-      return [];
-    }
-  });
-  const [updateRoutine, setUpdateRoutine] = useState(false);
-  const [routineInput, setRoutineInput] = useState("");
+export default function List({listName}) {
+  // If there are items saved in local storage, sets list to the saved list, otherwise list is empty by default
+  const [list, setList] = useState(() => {
+      const savedList = localStorage.getItem(listName);
+      if (savedList) {
+        return JSON.parse(savedList);
+      } else {
+        return [];
+      }
+    });
+    const [update, setUpdate] = useState(false);
+    // inputValue is a new item in the list
+    const [listInput, setListInput] = useState("");
   
-  // Adds new item to list
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setRoutine([...routine, { text: routineInput, completed: false }]);
-    setRoutineInput("");
-  };
   
+    // Adds new item to list
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setList([...list, { text: listInput, completed: false }]);
+      setListInput("");
+    };
   
     // Saves list to local storage whenever it changes
     useEffect(() => {
-      localStorage.setItem("routine", JSON.stringify(routine));
-    }, [routine]);
-
+      localStorage.setItem(listName, JSON.stringify(list));
+    }, [list]);
   
     // Removes item from list
     const handleDelete = (index) => {
-      const newRoutine = [...routine];
-      newRoutine.splice(index, 1);
-      setRoutine(newRoutine);
+      const newList = [...list];
+      newList.splice(index, 1);
+      setList(newList);
     };
-    
-    // Tick and cross off item
+  
+    // Tick and cross off list item
     const handleComplete = (index) => {
-      
-      const newRoutine = [...routine];
-      newRoutine[index].completed = !newRoutine[index].completed;
-      setRoutine(newRoutine);
+      const newList = [...list];
+      newList[index].completed = !newList[index].completed;
+      setList(newList);
     };
-    
-    
   
       return (
-          <section id="routine" className="justify-self-end col-start-3 text-left p-5 max-w-xs w-xs min-w-[350px] bg-[#ffddf4]/25 rounded-md">
-          <h1 className="text-black mb-2">Daily Routine:</h1>
-          <ul className="mb-3">
-            {routine.map((item, index) => (
+          <section id="routine" className="p-5 text-left max-w-xs w-xs min-w-[350px] bg-[#52c4ff]/25 rounded-md">
+          <h1 className="text-black mb-2">{listName}</h1>
+          
+          <ul className="mb-2">
+            {list.map((item, index) => (
               <li
                 key={index}
                 className={`text-black ${
                   item.completed && "line-through"
-                } break-words`}
-                
+                }`}
               >
                 <input
                   type="checkbox"
@@ -62,7 +60,7 @@ export default function Routine() {
                   onChange={() => handleComplete(index)}
                 />
                 {item.text}
-{updateRoutine && <button className="ml-2" onClick={() => handleDelete(index)}>
+                {update && <button className="ml-2" onClick={() => handleDelete(index)}>
                   <div className="h-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -84,15 +82,14 @@ export default function Routine() {
             ))}
           </ul>
           <form onSubmit={handleSubmit}>
-            <button className="text-center bg-[#c8839a] rounded-md border-none px-2 text-xs h-7" type="button" onClick={() => setUpdateRoutine(!updateRoutine)}>{!updateRoutine ? "Update" : "Finished updating"}</button>
-             {updateRoutine && 
+          <button className="text-center bg-[#c8839a] rounded-md border-none px-2 text-xs h-7" type="button" onClick={() => setUpdate(!update)}>{!update ? "Update" : "Finished updating"}</button>
+             {update && 
              <div>
              <input
-             
               className="bg-[#9ffff3] text-gray-800 rounded text-sm h-7"
               type="text"
-              value={routineInput}
-              onChange={(e) => setRoutineInput(e.target.value)}
+              value={listInput}
+              onChange={(e) => setListInput(e.target.value)}
             />
             <button
               type="submit"
@@ -101,6 +98,7 @@ export default function Routine() {
               +
             </button></div>}
           </form>
+          
         </section>
       )
 }
