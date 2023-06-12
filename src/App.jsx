@@ -1,46 +1,23 @@
 import { useState, useEffect } from "react";
-import Clock from "react-clock";
+
 import "./App.css";
-import Routine from "./components/routine";
-import Todo from "./components/todo";
-import List from "./components/list"
+
+import List from "./components/list";
+import { day, dateString } from "./utils/dates";
 
 function App() {
   // value = current date and time
   const [dateTime, setDateTime] = useState(new Date());
-
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
-  const d = new Date();
-  const day = days[d.getDay()];
-  const date = d.getDate();
-  const year = d.getFullYear();
-  const month = months[d.getMonth()];
-
-  const dateString = date + " " + month + " " + year;
+  const [cardList, setCardList] = useState(() => {
+    const savedList = localStorage.getItem("Card List");
+    if (savedList) {
+      return JSON.parse(savedList);
+    } else {
+      return ["Await", "Routine", "To do"];
+    }
+  });
+  const [newCardName, setNewCardName] = useState("");
+  const [newCard, setNewCard] = useState(false);
 
   // Updates time every second and sets state accordingly. dateTime is used in the Clock.
   useEffect(() => {
@@ -51,6 +28,20 @@ function App() {
     };
   }, []);
 
+  // Saves cardList to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("Card List", JSON.stringify(cardList));
+  }, [cardList]);
+
+  function addCard(e) {
+    e.preventDefault();
+    const newCardList = [...cardList];
+    newCardList.push(newCardName);
+    setCardList(newCardList);
+    setNewCardName("");
+    setNewCard(false);
+  }
+
   return (
     <div className="bg-[#93415c] h-full p-5">
       <div className="">
@@ -58,19 +49,30 @@ function App() {
           <h1 className="text-7xl text-black relative bottom-4">
             {day}, <span className="text-[2rem]">{dateString}</span>
           </h1>
-          <h1 className="absolute top-0 right-0 text-3xl p-5 text-black">{dateTime.toLocaleTimeString()}</h1>
+          <h1 className="absolute top-0 right-0 text-3xl p-5 text-black">
+            {dateTime.toLocaleTimeString()}
+          </h1>
         </section>
-        {/* <Clock
-          className=""
-          renderMinuteMarks={false}
-          renderSecondHand={false}
-          value={dateTime}
-        /> */}
       </div>
-      <div className="flex mt-12 justify-center gap-20">
-        <List listName="Await" />
-        <List listName="Routine" />
-        <List listName="To do" />
+      <button onClick={() => setNewCard(true)}>+</button>
+      {newCard && (
+        <form onSubmit={addCard}>
+          <input
+            type="text"
+            value={newCardName}
+            onChange={(e) => setNewCardName(e.target.value)}
+          ></input>
+          <button type="submit">Add Card</button>
+        </form>
+      )}
+      <div className="m-auto grid grid-cols-3 gap-12 max-w-[1300px] ">
+        {cardList.map((cardName) => (
+          <List
+            cardList={cardList}
+            setCardList={setCardList}
+            listName={cardName}
+          />
+        ))}
       </div>
     </div>
   );
