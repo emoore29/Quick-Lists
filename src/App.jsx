@@ -56,14 +56,17 @@ function App() {
       </div>
       <button onClick={() => setNewCard(true)}>+</button>
       {newCard && (
-        <form onSubmit={addCard}>
-          <input
-            type="text"
-            value={newCardName}
-            onChange={(e) => setNewCardName(e.target.value)}
-          ></input>
-          <button type="submit">Add Card</button>
-        </form>
+        <>
+          <form onSubmit={addCard}>
+            <input
+              type="text"
+              value={newCardName}
+              onChange={(e) => setNewCardName(e.target.value)}
+            ></input>
+            <button type="submit">Add Card</button>
+          </form>
+          <button onClick={() => setNewCard(false)}>Cancel</button>
+        </>
       )}
       <div className="m-auto grid grid-cols-3 gap-12 max-w-[1300px] ">
         {cardList.map((cardName) => (
