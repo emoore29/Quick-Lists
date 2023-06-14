@@ -70,13 +70,19 @@ export default function List({ listName, cardList, setCardList }) {
 
   // updates list based on new item
   const handleUpdate = (e, index) => {
-    debugger;
     e.preventDefault();
     const newList = [...list];
     newList[index].text = updateItem;
     newList[index].edit = false;
     setUpdateItem("");
     setList(newList);
+  };
+
+  // clears all completed items
+  const clearAllCompletedItems = () => {
+    const newList = [...list];
+    const nonCompletedItemList = newList.filter((item) => !item.completed);
+    setList(nonCompletedItemList);
   };
 
   return (
@@ -169,6 +175,9 @@ export default function List({ listName, cardList, setCardList }) {
         listName !== "To do" && <button onClick={deleteCard}>Delete</button>}
       <button onClick={resetList}>Reset all</button>
       <button onClick={deleteAllListItems}>Delete all</button>
+      <button onClick={clearAllCompletedItems}>
+        Clear all completed items
+      </button>
     </section>
   );
 }
