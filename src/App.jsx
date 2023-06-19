@@ -54,7 +54,7 @@ function App() {
           </h1>
         </section>
       </div>
-      <div>
+      <div className="mb-4">
         {newCard ? (
           <button onClick={() => setNewCard(false)}>
             <CancelX />
@@ -66,18 +66,17 @@ function App() {
         )}
       </div>
       {newCard && (
-        <>
-          <form onSubmit={addCard}>
-            <input
-              type="text"
-              value={newCardName}
-              onChange={(e) => setNewCardName(e.target.value)}
-            ></input>
-            <button type="submit">
-              <Plus />
-            </button>
-          </form>
-        </>
+        <form onSubmit={addCard} className="mb-4">
+          <input
+            type="text"
+            className=" text-sm"
+            value={newCardName}
+            onChange={(e) => setNewCardName(e.target.value)}
+          ></input>
+          <button type="submit">
+            <Plus />
+          </button>
+        </form>
       )}
       <div className="m-auto grid grid-cols-3 gap-12 max-w-[1300px] ">
         {cardList.map((cardName) => (

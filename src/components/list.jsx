@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { KebabMenu, DoneSvg, EditSvg } from "./svgs";
+import { KebabMenu, DoneSvg, EditSvg, Plus } from "./svgs";
 export default function List({ listName, cardList, setCardList }) {
   // If there are items saved in local storage, sets list to the saved list, otherwise list is empty by default
   const [list, setList] = useState(() => {
@@ -33,6 +33,7 @@ export default function List({ listName, cardList, setCardList }) {
     const newList = [...list];
     newList.splice(index, 1);
     setList(newList);
+    setIsMenuVisible(false);
   };
 
   // Tick and cross off list item
@@ -55,11 +56,13 @@ export default function List({ listName, cardList, setCardList }) {
     const newList = [...list];
     newList.map((item) => (item.completed = false));
     setList(newList);
+    setIsMenuVisible(false);
   };
 
   // delete all list items
   const deleteAllListItems = () => {
     setList([]);
+    setIsMenuVisible(false);
   };
 
   // edit a specific item in the list
@@ -84,6 +87,7 @@ export default function List({ listName, cardList, setCardList }) {
     const newList = [...list];
     const nonCompletedItemList = newList.filter((item) => !item.completed);
     setList(nonCompletedItemList);
+    setIsMenuVisible(false);
   };
 
   return (
@@ -91,7 +95,7 @@ export default function List({ listName, cardList, setCardList }) {
       id="routine"
       className="p-5 text-left w-full min-w-[350px] bg-[#52c4ff]/25 rounded-md"
     >
-      <div className="flex items-center justify-center gap-2  mb-8 ">
+      <div className="flex items-center justify-center gap-2 mb-4">
         <h1 className="text-black align-middle">{listName}</h1>
         <button className="" type="button" onClick={() => setUpdate(!update)}>
           {!update ? <EditSvg /> : <DoneSvg />}
@@ -100,18 +104,15 @@ export default function List({ listName, cardList, setCardList }) {
 
       <form onSubmit={handleSubmit}>
         {update && (
-          <div className=" mx-auto">
+          <div className="flex justify-center mb-4">
             <input
               className="bg-[#9ffff3] text-gray-800 rounded text-sm h-7"
               type="text"
               value={listInput}
               onChange={(e) => setListInput(e.target.value)}
             />
-            <button
-              type="submit"
-              className="text-center bg-[#c8839a] rounded-full border-none px-2 ml-2 mr-2 mb-2 text-gray-800 h-7"
-            >
-              +
+            <button type="submit">
+              <Plus />
             </button>
           </div>
         )}
@@ -167,24 +168,24 @@ export default function List({ listName, cardList, setCardList }) {
           </li>
         ))}
       </ul>
-      <div className="relative">
+      <div className="relative flex justify-end">
         {isMenuVisible && (
-          <div className="absolute bottom-8 bg-stone-600/95 p-5 rounded-md">
+          <div className="absolute bottom-8 bg-stone-600/95 p-4 rounded-md">
             <ul>
               {listName !== "Await" &&
                 listName !== "Routine" &&
                 listName !== "To do" && (
-                  <li>
+                  <li className="p-1">
                     <button onClick={deleteCard}>Delete</button>
                   </li>
                 )}
-              <li>
+              <li className="p-1  hover:bg-white">
                 <button onClick={resetList}>Uncheck all</button>
               </li>
-              <li>
+              <li className="p-1 hover:bg-white">
                 <button onClick={deleteAllListItems}>Delete all</button>
               </li>
-              <li>
+              <li className="p-1 hover:bg-white">
                 <button onClick={clearAllCompletedItems}>
                   Clear all completed items
                 </button>
@@ -195,6 +196,7 @@ export default function List({ listName, cardList, setCardList }) {
         <button
           id="kebab-menu"
           onClick={() => setIsMenuVisible(!isMenuVisible)}
+          className="hover:bg-white"
         >
           <KebabMenu />
         </button>
