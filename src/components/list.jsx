@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { KebabMenu, DoneSvg, EditSvg } from "./svgs";
 export default function List({ listName, cardList, setCardList }) {
   // If there are items saved in local storage, sets list to the saved list, otherwise list is empty by default
   const [list, setList] = useState(() => {
@@ -14,6 +14,7 @@ export default function List({ listName, cardList, setCardList }) {
   // inputValue is a new item in the list
   const [listInput, setListInput] = useState("");
   const [updateItem, setUpdateItem] = useState("");
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
 
   // Adds new item to list
   const handleSubmit = (e) => {
@@ -90,20 +91,16 @@ export default function List({ listName, cardList, setCardList }) {
       id="routine"
       className="p-5 text-left w-full min-w-[350px] bg-[#52c4ff]/25 rounded-md"
     >
-      <div>
-        <h1 className="text-black mb-2">{listName}</h1>
-        <button
-          className="text-center bg-[#c8839a] rounded-md border-none px-2 text-xs h-7"
-          type="button"
-          onClick={() => setUpdate(!update)}
-        >
-          {!update ? "Update" : "Finished updating"}
+      <div className="flex items-center justify-center gap-2  mb-8 ">
+        <h1 className="text-black align-middle">{listName}</h1>
+        <button className="" type="button" onClick={() => setUpdate(!update)}>
+          {!update ? <EditSvg /> : <DoneSvg />}
         </button>
       </div>
 
       <form onSubmit={handleSubmit}>
         {update && (
-          <div>
+          <div className=" mx-auto">
             <input
               className="bg-[#9ffff3] text-gray-800 rounded text-sm h-7"
               type="text"
@@ -119,7 +116,7 @@ export default function List({ listName, cardList, setCardList }) {
           </div>
         )}
       </form>
-      <ul className="mb-2">
+      <ul className="mb-8">
         {list.map((item, index) => (
           <li
             key={index}
@@ -170,14 +167,38 @@ export default function List({ listName, cardList, setCardList }) {
           </li>
         ))}
       </ul>
-      {listName !== "Await" &&
-        listName !== "Routine" &&
-        listName !== "To do" && <button onClick={deleteCard}>Delete</button>}
-      <button onClick={resetList}>Reset all</button>
-      <button onClick={deleteAllListItems}>Delete all</button>
-      <button onClick={clearAllCompletedItems}>
-        Clear all completed items
-      </button>
+      <div className="relative">
+        {isMenuVisible && (
+          <div className="absolute bottom-8 bg-stone-600/95 p-5 rounded-md">
+            <ul>
+              {listName !== "Await" &&
+                listName !== "Routine" &&
+                listName !== "To do" && (
+                  <li>
+                    <button onClick={deleteCard}>Delete</button>
+                  </li>
+                )}
+              <li>
+                <button onClick={resetList}>Uncheck all</button>
+              </li>
+              <li>
+                <button onClick={deleteAllListItems}>Delete all</button>
+              </li>
+              <li>
+                <button onClick={clearAllCompletedItems}>
+                  Clear all completed items
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
+        <button
+          id="kebab-menu"
+          onClick={() => setIsMenuVisible(!isMenuVisible)}
+        >
+          <KebabMenu />
+        </button>
+      </div>
     </section>
   );
 }

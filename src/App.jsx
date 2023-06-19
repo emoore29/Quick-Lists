@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import { SquaresPlus, Plus, CancelX } from "./components/svgs";
 import "./App.css";
 
 import List from "./components/list";
@@ -54,7 +54,17 @@ function App() {
           </h1>
         </section>
       </div>
-      <button onClick={() => setNewCard(true)}>+</button>
+      <div>
+        {newCard ? (
+          <button onClick={() => setNewCard(false)}>
+            <CancelX />
+          </button>
+        ) : (
+          <button onClick={() => setNewCard(true)}>
+            <SquaresPlus />
+          </button>
+        )}
+      </div>
       {newCard && (
         <>
           <form onSubmit={addCard}>
@@ -63,9 +73,10 @@ function App() {
               value={newCardName}
               onChange={(e) => setNewCardName(e.target.value)}
             ></input>
-            <button type="submit">Add Card</button>
+            <button type="submit">
+              <Plus />
+            </button>
           </form>
-          <button onClick={() => setNewCard(false)}>Cancel</button>
         </>
       )}
       <div className="m-auto grid grid-cols-3 gap-12 max-w-[1300px] ">
