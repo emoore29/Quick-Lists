@@ -43,24 +43,30 @@ function App() {
   }
 
   return (
-    <div className="bg-[#93415c] h-full p-5">
+    <div className="bg-light-shade h-full p-5 text-dark-shade">
       <div className="">
-        <section id="header" className="mb-20">
-          <h1 className="text-7xl text-black relative bottom-4">
-            {day}, <span className="text-[2rem]">{dateString}</span>
+        <section id="header" className="mb-4">
+          <h1 className="text-3xl relative bottom-4">
+            {day}, <span className="text-3xl">{dateString}</span>
           </h1>
-          <h1 className="absolute top-0 right-0 text-3xl p-5 text-black">
+          <h1 className="absolute top-0 right-0 text-xl p-5">
             {dateTime.toLocaleTimeString()}
           </h1>
         </section>
       </div>
       <div className="mb-4">
         {newCard ? (
-          <button onClick={() => setNewCard(false)}>
+          <button
+            className="hover:text-dark-accent"
+            onClick={() => setNewCard(false)}
+          >
             <CancelX />
           </button>
         ) : (
-          <button onClick={() => setNewCard(true)}>
+          <button
+            className="hover:text-dark-accent"
+            onClick={() => setNewCard(true)}
+          >
             <SquaresPlus />
           </button>
         )}
@@ -73,12 +79,12 @@ function App() {
             value={newCardName}
             onChange={(e) => setNewCardName(e.target.value)}
           ></input>
-          <button type="submit">
+          <button className="hover:text-dark-accent" type="submit">
             <Plus />
           </button>
         </form>
       )}
-      <div className="m-auto grid grid-cols-3 gap-12 max-w-[1300px] ">
+      <div className="mx-auto grid grid-cols-3 gap-12 max-w-[1300px] mb-12">
         {cardList.map((cardName) => (
           <List
             cardList={cardList}

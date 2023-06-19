@@ -93,11 +93,15 @@ export default function List({ listName, cardList, setCardList }) {
   return (
     <section
       id="routine"
-      className="p-5 text-left w-full min-w-[350px] bg-[#52c4ff]/25 rounded-md"
+      className="p-5 text-left min-h-[350px] w-full min-w-[350px] bg-main-brand rounded-md text-light-shade"
     >
       <div className="flex items-center justify-center gap-2 mb-4">
-        <h1 className="text-black align-middle">{listName}</h1>
-        <button className="" type="button" onClick={() => setUpdate(!update)}>
+        <h1 className="align-middle">{listName}</h1>
+        <button
+          className="hover:text-light-accent"
+          type="button"
+          onClick={() => setUpdate(!update)}
+        >
           {!update ? <EditSvg /> : <DoneSvg />}
         </button>
       </div>
@@ -106,12 +110,12 @@ export default function List({ listName, cardList, setCardList }) {
         {update && (
           <div className="flex justify-center mb-4">
             <input
-              className="bg-[#9ffff3] text-gray-800 rounded text-sm h-7"
+              className=" rounded text-sm h-7"
               type="text"
               value={listInput}
               onChange={(e) => setListInput(e.target.value)}
             />
-            <button type="submit">
+            <button className="hover:text-dark-accent" type="submit">
               <Plus />
             </button>
           </div>
@@ -119,10 +123,7 @@ export default function List({ listName, cardList, setCardList }) {
       </form>
       <ul className="mb-8">
         {list.map((item, index) => (
-          <li
-            key={index}
-            className={`text-black ${item.completed && "line-through"}`}
-          >
+          <li key={index} className={`${item.completed && "line-through"}`}>
             <input
               type="checkbox"
               className="mr-2 bg-[#c8839a]-100 border-0 rounded-md text-[#9ffff3]-500 focus:ring-0 focus:ring-offset-0"
@@ -136,13 +137,18 @@ export default function List({ listName, cardList, setCardList }) {
                   defaultValue={item.text}
                   onChange={(e) => setUpdateItem(e.target.value)}
                 />
-                <button type="submit">Submit</button>
+                <button className="hover:text-dark-accent" type="submit">
+                  Submit
+                </button>
               </form>
             )}
             {item.edit === false && item.text}
             {update && (
               <>
-                <button className="ml-2" onClick={() => handleDelete(index)}>
+                <button
+                  className="ml-2 hover:text-dark-accent"
+                  onClick={() => handleDelete(index)}
+                >
                   <div className="h-4">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +166,10 @@ export default function List({ listName, cardList, setCardList }) {
                     </svg>
                   </div>
                 </button>
-                <button onClick={() => handleEdit(index)}>
+                <button
+                  className="hover:text-dark-accent"
+                  onClick={() => handleEdit(index)}
+                >
                   {item.edit === false ? "Edit" : "Cancel Edit"}
                 </button>
               </>
@@ -168,24 +177,24 @@ export default function List({ listName, cardList, setCardList }) {
           </li>
         ))}
       </ul>
-      <div className="relative flex justify-end">
+      <div id="menu" className="relative flex align-end justify-end">
         {isMenuVisible && (
-          <div className="absolute bottom-8 bg-stone-600/95 p-4 rounded-md">
+          <div className="absolute bottom-8 bg-dark-accent p-4 rounded-md">
             <ul>
               {listName !== "Await" &&
                 listName !== "Routine" &&
                 listName !== "To do" && (
-                  <li className="p-1">
+                  <li className="p-1 hover:bg-light-accent">
                     <button onClick={deleteCard}>Delete</button>
                   </li>
                 )}
-              <li className="p-1  hover:bg-white">
+              <li className="p-1  hover:bg-light-accent">
                 <button onClick={resetList}>Uncheck all</button>
               </li>
-              <li className="p-1 hover:bg-white">
+              <li className="p-1 hover:bg-light-accent">
                 <button onClick={deleteAllListItems}>Delete all</button>
               </li>
-              <li className="p-1 hover:bg-white">
+              <li className="p-1 hover:bg-light-accent">
                 <button onClick={clearAllCompletedItems}>
                   Clear all completed items
                 </button>
@@ -196,7 +205,7 @@ export default function List({ listName, cardList, setCardList }) {
         <button
           id="kebab-menu"
           onClick={() => setIsMenuVisible(!isMenuVisible)}
-          className="hover:bg-white"
+          className="hover:text-light-accent "
         >
           <KebabMenu />
         </button>
