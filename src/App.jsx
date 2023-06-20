@@ -13,7 +13,7 @@ function App() {
     if (savedList) {
       return JSON.parse(savedList);
     } else {
-      return ["Await", "Routine", "To do"];
+      return ["Routine", "To do", "Await"];
     }
   });
   const [newCardName, setNewCardName] = useState("");
@@ -43,11 +43,12 @@ function App() {
   }
 
   return (
-    <div className="bg-brand-white dark:bg-main-brand h-full p-12 text-main-brand dark:text-light-shade font-lateef min-h-screen">
+    <div className="bg-brand-white dark:bg-dark-shade h-full p-16 text-main-brand dark:text-light-shade font-poppins min-h-screen">
       <div className="">
-        <section id="header" className="mb-4">
-          <h1 className="text-4xl relative bottom-4">
-            {day}, <span className="text-4xl">{dateString}</span>
+        <section id="header" className="mb-24">
+          <h1 className="text-4xl  relative bottom-4  font-normal">
+            <span className="text-medium-shade">{day}</span>,
+            <span className="text-4xl"> {dateString}</span>
           </h1>
           <h1 className="absolute top-0 right-0 text-xl p-5">
             {dateTime.toLocaleTimeString()}

@@ -94,12 +94,12 @@ export default function List({ listName, cardList, setCardList }) {
   return (
     <section
       id="list"
-      className="p-5 text-left min-h-[350px] w-full min-w-[350px] bg-light-shade dark:bg-dark-shade text-lg"
+      className="p-5 text-left min-h-[350px] w-full min-w-[350px] bg-brand-white dark:bg-dark-shade text-lg border-solid rounded-lg shadow-lightSm dark:shadow-darkSm"
     >
       <div className="flex items-center justify-center gap-2 mb-4 text-dark-shade dark:text-light-shade">
-        <h1 className="align-middle">{listName}</h1>
+        <h1 className="align-middle font-normal">{listName}</h1>
         <button
-          className="hover:text-medium-shade"
+          className="hover:text-medium-shade dark:hover:text-medium-shade"
           type="button"
           onClick={() => setUpdate(!update)}
         >
@@ -116,18 +116,27 @@ export default function List({ listName, cardList, setCardList }) {
               value={listInput}
               onChange={(e) => setListInput(e.target.value)}
             />
-            <button className="hover:text-medium-shade" type="submit">
+            <button
+              className="hover:text-medium-shade dark:hover:text-medium-shade"
+              type="submit"
+            >
               <Plus />
             </button>
           </div>
         )}
       </form>
-      <ul className="mb-8">
+      <ul className="mb-8 font-light text-sm ">
         {list.map((item, index) => (
-          <li key={index} className={`${item.completed && "line-through"}`}>
+          <li
+            key={index}
+            className={`p-[0.1rem] ${
+              item.completed &&
+              "line-through text-light-shade dark:text-medium-alt"
+            }`}
+          >
             <input
               type="checkbox"
-              className="mr-2 bg-[#c8839a]-100 border-0 rounded-md text-[#9ffff3]-500 focus:ring-0 focus:ring-offset-0"
+              className="mr-2 bg-medium-shade dark:bg-light-shade active:bg-light-shade border-0 dark:active:bg-medium-shade text-light-shade dark:text-medium-alt rounded-md focus:ring-0 focus:ring-offset-0 "
               checked={item.completed}
               onChange={() => handleComplete(index)}
             />
@@ -138,7 +147,10 @@ export default function List({ listName, cardList, setCardList }) {
                   defaultValue={item.text}
                   onChange={(e) => setUpdateItem(e.target.value)}
                 />
-                <button className="hover:text-medium-shade" type="submit">
+                <button
+                  className="hover:text-medium-shade dark:hover:text-light-shade"
+                  type="submit"
+                >
                   Submit
                 </button>
               </form>
@@ -178,25 +190,37 @@ export default function List({ listName, cardList, setCardList }) {
           </li>
         ))}
       </ul>
-      <div id="menu" className="relative flex align-end justify-end">
+      <div id="menu" className="relative flex align-end justify-end text-sm ">
         {isMenuVisible && (
-          <div className="absolute bottom-8 bg-dark-accent p-4 rounded-md">
+          <div className="absolute bottom-8 p-4 rounded-md bg-light-shade dark:text-dark-shade">
             <ul>
               {listName !== "Await" &&
                 listName !== "Routine" &&
                 listName !== "To do" && (
-                  <li className="p-1 hover:bg-medium-shade">
-                    <button onClick={deleteCard}>Delete</button>
+                  <li className="p-1 w-full hover:text-medium-shade">
+                    <button className="w-full text-left" onClick={deleteCard}>
+                      Delete
+                    </button>
                   </li>
                 )}
-              <li className="p-1  hover:bg-medium-shade">
-                <button onClick={resetList}>Uncheck all</button>
+              <li className="p-1 w-full hover:text-medium-shade">
+                <button className="w-full text-left" onClick={resetList}>
+                  Uncheck all
+                </button>
               </li>
-              <li className="p-1 hover:bg-medium-shade">
-                <button onClick={deleteAllListItems}>Delete all</button>
+              <li className="p-1 w-full hover:text-medium-shade">
+                <button
+                  className="w-full text-left"
+                  onClick={deleteAllListItems}
+                >
+                  Delete all
+                </button>
               </li>
-              <li className="p-1 hover:bg-medium-shade">
-                <button onClick={clearAllCompletedItems}>
+              <li className="p-1 w-full hover:text-medium-shade">
+                <button
+                  className="w-full text-left"
+                  onClick={clearAllCompletedItems}
+                >
                   Clear all completed items
                 </button>
               </li>
@@ -206,7 +230,7 @@ export default function List({ listName, cardList, setCardList }) {
         <button
           id="kebab-menu"
           onClick={() => setIsMenuVisible(!isMenuVisible)}
-          className="hover:text-medium-shade "
+          className="hover:text-medium-shade dark:hover:text-medium-shade"
         >
           <KebabMenu />
         </button>
