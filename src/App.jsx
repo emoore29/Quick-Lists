@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SquaresPlus, Plus, CancelX } from "./components/svgs";
 import "./App.css";
-
+import ThemeSwitch from "./components/themeSwitch";
 import List from "./components/list";
 import { day, dateString } from "./utils/dates";
 
@@ -45,14 +45,18 @@ function App() {
   return (
     <div className="bg-brand-white dark:bg-dark-shade h-full p-16 text-main-brand dark:text-light-shade font-poppins min-h-screen">
       <div className="">
-        <section id="header" className="mb-24">
-          <h1 className="text-4xl  relative bottom-4  font-normal">
-            <span className="text-medium-shade">{day}</span>,
+        <section
+          id="header"
+          className="mb-24 flex justify-between items-center"
+        >
+          <h1 className="text-4xl font-normal">
+            <span className="text-medium-shade">{day}</span>
             <span className="text-4xl"> {dateString}</span>
           </h1>
-          <h1 className="absolute top-0 right-0 text-xl p-5">
-            {dateTime.toLocaleTimeString()}
-          </h1>
+          <div className="flex items-center">
+            <ThemeSwitch />
+            <h1 className="">{dateTime.toLocaleTimeString()}</h1>
+          </div>
         </section>
       </div>
 
