@@ -3,18 +3,14 @@
 body {
   padding: 0;
   width: 100vw;
-  height: 100vh;
-  background-color: #c6beb7;
+  min-height: 100vh;
+  background-color: #fdfbf9;
 }
 
 #root {
-  padding: 2rem;
   width: 100vw;
-  height: 100vh;
   margin: 0;
-  text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: left;
+  min-height: 100vh;
 }

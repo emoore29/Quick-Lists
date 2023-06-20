@@ -49,6 +49,7 @@ export default function List({ listName, cardList, setCardList }) {
     const updatedCardList = newCardList.filter((item) => item !== listName);
     setCardList(updatedCardList);
     localStorage.removeItem(listName);
+    setIsMenuVisible(false);
   };
 
   // Reset all items in a list
@@ -92,13 +93,13 @@ export default function List({ listName, cardList, setCardList }) {
 
   return (
     <section
-      id="routine"
-      className="p-5 text-left min-h-[350px] w-full min-w-[350px] bg-main-brand rounded-md text-light-shade"
+      id="list"
+      className="p-5 text-left min-h-[350px] w-full min-w-[350px] bg-light-shade dark:bg-dark-shade text-lg"
     >
-      <div className="flex items-center justify-center gap-2 mb-4">
+      <div className="flex items-center justify-center gap-2 mb-4 text-dark-shade dark:text-light-shade">
         <h1 className="align-middle">{listName}</h1>
         <button
-          className="hover:text-light-accent"
+          className="hover:text-medium-shade"
           type="button"
           onClick={() => setUpdate(!update)}
         >
@@ -110,12 +111,12 @@ export default function List({ listName, cardList, setCardList }) {
         {update && (
           <div className="flex justify-center mb-4">
             <input
-              className=" rounded text-sm h-7"
+              className=" rounded h-7 text-dark-shade"
               type="text"
               value={listInput}
               onChange={(e) => setListInput(e.target.value)}
             />
-            <button className="hover:text-dark-accent" type="submit">
+            <button className="hover:text-medium-shade" type="submit">
               <Plus />
             </button>
           </div>
@@ -137,7 +138,7 @@ export default function List({ listName, cardList, setCardList }) {
                   defaultValue={item.text}
                   onChange={(e) => setUpdateItem(e.target.value)}
                 />
-                <button className="hover:text-dark-accent" type="submit">
+                <button className="hover:text-medium-shade" type="submit">
                   Submit
                 </button>
               </form>
@@ -146,7 +147,7 @@ export default function List({ listName, cardList, setCardList }) {
             {update && (
               <>
                 <button
-                  className="ml-2 hover:text-dark-accent"
+                  className="ml-2 hover:text-medium-shade"
                   onClick={() => handleDelete(index)}
                 >
                   <div className="h-4">
@@ -167,7 +168,7 @@ export default function List({ listName, cardList, setCardList }) {
                   </div>
                 </button>
                 <button
-                  className="hover:text-dark-accent"
+                  className="hover:text-medium-shade"
                   onClick={() => handleEdit(index)}
                 >
                   {item.edit === false ? "Edit" : "Cancel Edit"}
@@ -184,17 +185,17 @@ export default function List({ listName, cardList, setCardList }) {
               {listName !== "Await" &&
                 listName !== "Routine" &&
                 listName !== "To do" && (
-                  <li className="p-1 hover:bg-light-accent">
+                  <li className="p-1 hover:bg-medium-shade">
                     <button onClick={deleteCard}>Delete</button>
                   </li>
                 )}
-              <li className="p-1  hover:bg-light-accent">
+              <li className="p-1  hover:bg-medium-shade">
                 <button onClick={resetList}>Uncheck all</button>
               </li>
-              <li className="p-1 hover:bg-light-accent">
+              <li className="p-1 hover:bg-medium-shade">
                 <button onClick={deleteAllListItems}>Delete all</button>
               </li>
-              <li className="p-1 hover:bg-light-accent">
+              <li className="p-1 hover:bg-medium-shade">
                 <button onClick={clearAllCompletedItems}>
                   Clear all completed items
                 </button>
@@ -205,7 +206,7 @@ export default function List({ listName, cardList, setCardList }) {
         <button
           id="kebab-menu"
           onClick={() => setIsMenuVisible(!isMenuVisible)}
-          className="hover:text-light-accent "
+          className="hover:text-medium-shade "
         >
           <KebabMenu />
         </button>
