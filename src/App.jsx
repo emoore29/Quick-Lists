@@ -50,11 +50,11 @@ function App() {
           className="mb-24 flex justify-between items-center"
         >
           <h1 className="text-4xl font-normal">
-            <span className="text-medium-shade">{day}testing actions</span>
+            <span className="text-medium-shade">{day}</span>
             <span className="text-4xl"> {dateString}</span>
           </h1>
           <div className="flex items-center">
-            {/* <ThemeSwitch /> */}
+            <ThemeSwitch />
             <h1 className="">{dateTime.toLocaleTimeString()}</h1>
           </div>
         </section>
