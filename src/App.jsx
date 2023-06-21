@@ -54,7 +54,7 @@ function App() {
             <span className="text-4xl"> {dateString}</span>
           </h1>
           <div className="flex items-center">
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
             <h1 className="">{dateTime.toLocaleTimeString()}</h1>
           </div>
         </section>
