@@ -46,7 +46,10 @@ function App() {
   return (
     <div
       data-theme="default"
-      className="bg-background dark:bg-dmBackground h-full p-16 text-onBackground dark:text-dmOnBackground font-poppins min-h-screen"
+      className="h-full p-16 font-poppins min-h-screen
+      bg-background dark:bg-dmBackground 
+      text-onBackground dark:text-dmOnBackground/[87%]
+      "
     >
       <div className="">
         <section
@@ -58,7 +61,7 @@ function App() {
             <span className="text-4xl"> {dateString}</span>
           </h1>
           <div className="flex items-center">
-            <ThemeSwitch />
+            <ThemeSwitch secondaryColor="var(--color-secondary)" />
             <h1 className="">{dateTime.toLocaleTimeString()}</h1>
           </div>
         </section>

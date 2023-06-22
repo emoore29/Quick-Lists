@@ -14,7 +14,7 @@
     --color-secondary-variant: #018786;
     --color-background: #ffffff;
     --color-surface: #ffffff;
-    --color-on-background: #000000;
+    --color-on-background: 0, 0, 0;
     --color-on-primary: #ffffff;
     --color-on-secondary: #000000;
     --color-on-surface: #000000;
@@ -23,8 +23,8 @@
     --color-darkmode-primary-variant: #3700b3;
     --color-darkmode-secondary: #03dac6;
     --color-darkmode-background: #121212;
-    --color-darkmode-surface: #121212;
-    --color-darkmode-on-background: #ffffff;
+    --color-darkmode-surface: #1a1a1a;
+    --color-darkmode-on-background: 255, 255, 255;
     --color-darkmode-on-primary: #000000;
     --color-darkmode-on-secondary: #000000;
     --color-darkmode-on-surface: #ffffff;

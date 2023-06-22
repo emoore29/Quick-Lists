@@ -2,7 +2,7 @@ import { useState } from "react";
 import useDarkMode from "../utils/useDarkMode";
 import { DarkModeSwitch } from "react-toggle-dark-mode";
 
-export default function ThemeSwitch() {
+export default function ThemeSwitch({ secondaryColor }) {
   const [colorTheme, setTheme] = useDarkMode();
   const [darkMode, setDarkMode] = useState(
     colorTheme === "light" ? true : false
@@ -20,8 +20,8 @@ export default function ThemeSwitch() {
           style={{ marginRight: "2rem" }}
           checked={darkMode}
           onChange={toggleDarkMode}
-          moonColor="#ecdac4"
-          sunColor="#8f5843"
+          moonColor={secondaryColor}
+          sunColor={secondaryColor}
           size={50}
         />
       </div>

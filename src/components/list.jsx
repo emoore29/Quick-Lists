@@ -102,7 +102,7 @@ export default function List({ listName, cardList, setCardList }) {
         className="flex items-center justify-center gap-2 mb-4 
       text-onSurface dark:text-dmOnSurface"
       >
-        <h1 className="align-middle font-normal">{listName}</h1>
+        <h1 className="align-middle font-normal opacity-[87%]">{listName}</h1>
         <button
           className="hover:text-secondary"
           type="button"
@@ -126,12 +126,13 @@ export default function List({ listName, cardList, setCardList }) {
           </div>
         )}
       </form>
-      <ul className="mb-8 font-light text-sm">
+      <ul className="mb-8 font-light text-sm  opacity-[87%]">
         {list.map((item, index) => (
           <li
             key={index}
             className={`p-[0.1rem] font-roboto ${
-              item.completed && "line-through text-light dark:text-dark"
+              item.completed &&
+              "line-through text-onSurface/30 dark:text-dmOnSurface opacity-[38%]"
             }`}
           >
             <input
@@ -202,7 +203,10 @@ export default function List({ listName, cardList, setCardList }) {
           </li>
         ))}
       </ul>
-      <div id="menu" className="relative flex align-end justify-end text-sm ">
+      <div
+        id="menu"
+        className="relative flex align-end justify-end text-sm  opacity-[87%] "
+      >
         {isMenuVisible && (
           <div className="absolute bottom-8 p-4 rounded-md bg-light dark:text-dark-shade">
             <ul>
