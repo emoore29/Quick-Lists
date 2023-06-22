@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { SquaresPlus, Plus, CancelX } from "./components/svgs";
 import "./App.css";
+import "./index.css";
 import ThemeSwitch from "./components/themeSwitch";
 import List from "./components/list";
 import { day, dateString } from "./utils/dates";
@@ -45,7 +46,7 @@ function App() {
   return (
     <div
       data-theme="default"
-      className="bg-linx dark:bg-dark-shade h-full p-16 text-main-brand dark:text-light-shade font-poppins min-h-screen"
+      className="bg-background dark:bg-dmBackground h-full p-16 text-onBackground dark:text-dmOnBackground font-poppins min-h-screen"
     >
       <div className="">
         <section
@@ -53,7 +54,7 @@ function App() {
           className="mb-24 flex justify-between items-center"
         >
           <h1 className="text-4xl font-normal">
-            <span className="text-medium-shade">{day}</span>
+            <span className="text-primary dark:text-dmPrimary">{day}</span>
             <span className="text-4xl"> {dateString}</span>
           </h1>
           <div className="flex items-center">
@@ -75,14 +76,14 @@ function App() {
         <div className="mb-4">
           {newCard ? (
             <button
-              className="hover:text-medium-shade"
+              className="hover:text-secondary"
               onClick={() => setNewCard(false)}
             >
               <CancelX />
             </button>
           ) : (
             <button
-              className="hover:text-medium-shade"
+              className="hover:text-secondary"
               onClick={() => setNewCard(true)}
             >
               <SquaresPlus />
@@ -97,7 +98,7 @@ function App() {
                 value={newCardName}
                 onChange={(e) => setNewCardName(e.target.value)}
               ></input>
-              <button className="hover:text-medium-shade" type="submit">
+              <button className="hover:text-secondary" type="submit">
                 <Plus />
               </button>
             </form>

@@ -1,19 +1,56 @@
 @import url("https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html[data-theme="default"] {
-    --color-esther: 34, 39, 46;
-    --color-maximus: 45, 51, 59;
-    --color-linx: 34, 39, 46;
+  div[data-theme="default"] {
+    /* LIGHT MODE */
+    --color-primary: #6200ee;
+    --color-primary-variant: #3700b3;
+    --color-secondary: #03dac6;
+    --color-secondary-variant: #018786;
+    --color-background: #ffffff;
+    --color-surface: #ffffff;
+    --color-on-background: #000000;
+    --color-on-primary: #ffffff;
+    --color-on-secondary: #000000;
+    --color-on-surface: #000000;
+    /* DARK MODE */
+    --color-darkmode-primary: #bb86fc;
+    --color-darkmode-primary-variant: #3700b3;
+    --color-darkmode-secondary: #03dac6;
+    --color-darkmode-background: #121212;
+    --color-darkmode-surface: #121212;
+    --color-darkmode-on-background: #ffffff;
+    --color-darkmode-on-primary: #000000;
+    --color-darkmode-on-secondary: #000000;
+    --color-darkmode-on-surface: #ffffff;
   }
 
-  html[data-theme="neon"] {
-    --color-esther: 20, 61, 42;
-    --color-maximus: 13, 82, 66;
-    --color-linx: 20, 82, 11;
+  div[data-theme="watermelon"] {
+    /* LIGHT MODE */
+    --color-primary: #6200ee;
+    --color-primary-variant: #3700b3;
+    --color-secondary: #03dac6;
+    --color-secondary-variant: #018786;
+    --color-background: #ffffff;
+    --color-surface: #ffffff;
+    --color-on-background: #000000;
+    --color-on-primary: #ffffff;
+    --color-on-secondary: #000000;
+    --color-on-surface: #000000;
+    /* DARK MODE */
+    --color-darkmode-primary: #bb86fc;
+    --color-darkmode-primary-variant: #3700b3;
+    --color-darkmode-secondary: #03dac6;
+    --color-background: #121212;
+    --color-surface: #121212;
+    --color-darkmode-on-background: #ffffff;
+    --color-darkmode-on-primary: #000000;
+    --color-darkmode-on-secondary: #000000;
+    --color-darkmode-on-surface: #ffffff;
   }
 }

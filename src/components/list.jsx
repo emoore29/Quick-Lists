@@ -94,52 +94,64 @@ export default function List({ listName, cardList, setCardList }) {
   return (
     <section
       id="list"
-      className="p-5 text-left min-h-[350px] w-full min-w-[350px] bg-brand-white dark:bg-dark-shade text-lg border-solid rounded-lg shadow-lightSm dark:shadow-darkSm"
+      className="p-5 text-left min-h-[350px] w-full min-w-[350px] 
+      text-lg border-solid rounded-lg
+      bg-surface dark:bg-dmSurface shadow-lightSm dark:shadow-darkSm"
     >
-      <div className="flex items-center justify-center gap-2 mb-4 text-dark-shade dark:text-light-shade">
+      <div
+        className="flex items-center justify-center gap-2 mb-4 
+      text-onSurface dark:text-dmOnSurface"
+      >
         <h1 className="align-middle font-normal">{listName}</h1>
         <button
-          className="hover:text-medium-shade dark:hover:text-medium-shade"
+          className="hover:text-secondary"
           type="button"
           onClick={() => setUpdate(!update)}
         >
           {!update ? <EditSvg /> : <DoneSvg />}
         </button>
       </div>
-
       <form onSubmit={handleSubmit}>
         {update && (
           <div className="flex justify-center mb-4">
             <input
-              className=" rounded h-7 text-dark-shade"
+              className="rounded h-7 dark:text-onBackground"
               type="text"
               value={listInput}
               onChange={(e) => setListInput(e.target.value)}
             />
-            <button
-              className="hover:text-medium-shade dark:hover:text-medium-shade"
-              type="submit"
-            >
+            <button className="hover:text-secondary" type="submit">
               <Plus />
             </button>
           </div>
         )}
       </form>
-      <ul className="mb-8 font-light text-sm ">
+      <ul className="mb-8 font-light text-sm">
         {list.map((item, index) => (
           <li
             key={index}
-            className={`p-[0.1rem] ${
-              item.completed &&
-              "line-through text-light-shade dark:text-medium-alt"
+            className={`p-[0.1rem] font-roboto ${
+              item.completed && "line-through text-light dark:text-dark"
             }`}
           >
             <input
               type="checkbox"
-              className="mr-2 bg-medium-shade dark:bg-light-shade active:bg-light-shade border-0 dark:active:bg-medium-shade text-light-shade dark:text-medium-alt rounded-md focus:ring-0 focus:ring-offset-0 "
+              className="mr-2 border-1 rounded-md
+              text-primary dark:text-dmPrimary
+              bg-background
+              focus:ring-1 focus:ring-offset-1
+//            focus:ring-secondary focus:ring-offset-background dark:focus:ring-offset-dmBackground"
               checked={item.completed}
               onChange={() => handleComplete(index)}
             />
+
+            {/* // form-checkbox mr-2 border-0 rounded-md 
+//               bg-accent ***dark:bg-light*** breaks text color
+//               active:bg-light dark:active:bg-dark
+//               text-light dark:text-dark
+//               checked:accent-light dark:checked:accent-dark
+//               focus:ring-1 focus:ring-offset-1
+//               focus:ring-accent focus:ring-offset-light dark:focus:ring-offset-dark */}
             {item.edit === true && (
               <form onSubmit={(e) => handleUpdate(e, index)}>
                 <input
@@ -148,7 +160,7 @@ export default function List({ listName, cardList, setCardList }) {
                   onChange={(e) => setUpdateItem(e.target.value)}
                 />
                 <button
-                  className="hover:text-medium-shade dark:hover:text-light-shade"
+                  className="hover:text-accent dark:hover:text-light"
                   type="submit"
                 >
                   Submit
@@ -159,7 +171,7 @@ export default function List({ listName, cardList, setCardList }) {
             {update && (
               <>
                 <button
-                  className="ml-2 hover:text-medium-shade"
+                  className="ml-2 hover:text-accent"
                   onClick={() => handleDelete(index)}
                 >
                   <div className="h-4">
@@ -180,7 +192,7 @@ export default function List({ listName, cardList, setCardList }) {
                   </div>
                 </button>
                 <button
-                  className="hover:text-medium-shade"
+                  className="hover:text-accent"
                   onClick={() => handleEdit(index)}
                 >
                   {item.edit === false ? "Edit" : "Cancel Edit"}
@@ -192,23 +204,23 @@ export default function List({ listName, cardList, setCardList }) {
       </ul>
       <div id="menu" className="relative flex align-end justify-end text-sm ">
         {isMenuVisible && (
-          <div className="absolute bottom-8 p-4 rounded-md bg-light-shade dark:text-dark-shade">
+          <div className="absolute bottom-8 p-4 rounded-md bg-light dark:text-dark-shade">
             <ul>
               {listName !== "Await" &&
                 listName !== "Routine" &&
                 listName !== "To do" && (
-                  <li className="p-1 w-full hover:text-medium-shade">
+                  <li className="p-1 w-full hover:text-accent">
                     <button className="w-full text-left" onClick={deleteCard}>
                       Delete
                     </button>
                   </li>
                 )}
-              <li className="p-1 w-full hover:text-medium-shade">
+              <li className="p-1 w-full hover:text-accent">
                 <button className="w-full text-left" onClick={resetList}>
                   Uncheck all
                 </button>
               </li>
-              <li className="p-1 w-full hover:text-medium-shade">
+              <li className="p-1 w-full hover:text-accent">
                 <button
                   className="w-full text-left"
                   onClick={deleteAllListItems}
@@ -216,7 +228,7 @@ export default function List({ listName, cardList, setCardList }) {
                   Delete all
                 </button>
               </li>
-              <li className="p-1 w-full hover:text-medium-shade">
+              <li className="p-1 w-full hover:text-accent">
                 <button
                   className="w-full text-left"
                   onClick={clearAllCompletedItems}
@@ -230,7 +242,7 @@ export default function List({ listName, cardList, setCardList }) {
         <button
           id="kebab-menu"
           onClick={() => setIsMenuVisible(!isMenuVisible)}
-          className="hover:text-medium-shade dark:hover:text-medium-shade"
+          className="hover:text-accent dark:hover:text-medium-shade"
         >
           <KebabMenu />
         </button>
