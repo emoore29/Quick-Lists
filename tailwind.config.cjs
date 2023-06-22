@@ -12,6 +12,9 @@ module.exports = {
         "medium-shade": "#8f5843",
         "dark-shade": "#0f0907",
         "medium-alt": "#492d22",
+        esther: "rgb(var(--color-esther) / <alpha-value>)",
+        maximus: "rgb(var(--color-maximus) / <alpha-value>)",
+        linx: "rgb(var(--color-linx) / 1)",
       },
       fontFamily: {
         lateef: ["Lateef", "serif"],

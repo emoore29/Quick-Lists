@@ -43,7 +43,10 @@ function App() {
   }
 
   return (
-    <div className="bg-brand-white dark:bg-dark-shade h-full p-16 text-main-brand dark:text-light-shade font-poppins min-h-screen">
+    <div
+      data-theme="default"
+      className="bg-linx dark:bg-dark-shade h-full p-16 text-main-brand dark:text-light-shade font-poppins min-h-screen"
+    >
       <div className="">
         <section
           id="header"
