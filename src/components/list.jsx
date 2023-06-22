@@ -205,7 +205,7 @@ export default function List({ listName, cardList, setCardList }) {
       </ul>
       <div
         id="menu"
-        className="relative flex align-end justify-end text-sm  opacity-[87%] "
+        className="relative flex align-end justify-end text-sm opacity-[87%] "
       >
         {isMenuVisible && (
           <div className="absolute bottom-8 p-4 rounded-md bg-light dark:text-dark-shade">
