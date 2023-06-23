@@ -99,10 +99,10 @@ export default function List({ listName, cardList, setCardList }) {
       bg-surface dark:bg-dmSurface shadow-lightSm dark:shadow-darkSm"
     >
       <div
-        className="flex items-center justify-center gap-2 mb-4 
+        className="flex items-center gap-2 mb-4 
       text-onSurface dark:text-dmOnSurface"
       >
-        <h1 className="align-middle font-normal opacity-[87%]">{listName}</h1>
+        <h1 className="font-normal opacity-[87%]">{listName}</h1>
         <button
           className="hover:text-secondary"
           type="button"
