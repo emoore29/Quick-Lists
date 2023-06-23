@@ -16,23 +16,25 @@ module.exports = {
         onBackground: "rgb(var(--color-on-background), <alpha-value>)",
         onPrimary: "var(--color-on-primary)",
         onSecondary: "var(--color-on-secondary)",
-        onSurface: "var(--color-on-surface) / <alpha-value>",
+        onSurface: "rgb(var(--color-on-surface), <alpha-value>)",
         // DARK MODE
         dmPrimary: "var(--color-darkmode-primary)",
         dmPrimaryVariant: "var(--color-darkmode-primary-variant)",
         dmSecondary: "var(--color-darkmode-secondary)",
         dmBackground: "var(--color-darkmode-background)",
         dmSurface: "var(--color-darkmode-surface)",
+        dmRaisedSurface: "var(--color-darkmode-raised-surface)",
         dmOnBackground:
           "rgb(var(--color-darkmode-on-background), <alpha-value>)",
         dmOnPrimary: "var(--color-darkmode-on-primary)",
         dmOnSecondary: "var(--color-darkmode-on-secondary)",
-        dmOnSurface: "var(--color-darkmode-on-surface) / <alpha-value>",
+        dmOnSurface: "rgb(var(--color-darkmode-on-surface), <alpha-value>)",
       },
       fontFamily: {
         lateef: ["Lateef", "serif"],
         poppins: ["Poppins", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
+        kalam: ["Kalam", "handwriting"],
       },
       fontWeight: {
         thin: 100,

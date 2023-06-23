@@ -1,18 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  div[data-theme="default"] {
+  div[data-theme="plain"] {
     /* LIGHT MODE */
     --color-primary: #6200ee;
     --color-primary-variant: #3700b3;
     --color-secondary: #03dac6;
     --color-secondary-variant: #018786;
-    --color-background: #ffffff;
+    --color-background: #fefefe;
     --color-surface: #ffffff;
     --color-on-background: 0, 0, 0;
     --color-on-primary: #ffffff;
@@ -23,32 +24,34 @@
     --color-darkmode-primary-variant: #3700b3;
     --color-darkmode-secondary: #03dac6;
     --color-darkmode-background: #121212;
-    --color-darkmode-surface: #1a1a1a;
+    --color-darkmode-surface: #1e1e1e;
+    --color-darkmode-raised-surface: #292929;
     --color-darkmode-on-background: 255, 255, 255;
     --color-darkmode-on-primary: #000000;
     --color-darkmode-on-secondary: #000000;
     --color-darkmode-on-surface: #ffffff;
   }
 
-  div[data-theme="watermelon"] {
+  div[data-theme="cinnamon-bun"] {
     /* LIGHT MODE */
-    --color-primary: #6200ee;
+    --color-primary: #bf7d3a;
     --color-primary-variant: #3700b3;
-    --color-secondary: #03dac6;
+    --color-secondary: #d36b2d;
     --color-secondary-variant: #018786;
-    --color-background: #ffffff;
-    --color-surface: #ffffff;
-    --color-on-background: #000000;
+    --color-background: #f5ebe0;
+    --color-surface: #f5ebe0;
+    --color-on-background: 20, 18, 16;
     --color-on-primary: #ffffff;
     --color-on-secondary: #000000;
-    --color-on-surface: #000000;
+    --color-on-surface: 0, 0, 0;
     /* DARK MODE */
-    --color-darkmode-primary: #bb86fc;
+    --color-darkmode-primary: #b28253;
     --color-darkmode-primary-variant: #3700b3;
     --color-darkmode-secondary: #03dac6;
-    --color-background: #121212;
-    --color-surface: #121212;
-    --color-darkmode-on-background: #ffffff;
+    --color-darkmode-background: #141210;
+    --color-darkmode-surface: 79, 72, 64;
+    --color-darkmode-raised-surface: #38342e;
+    --color-darkmode-on-background: 245, 235, 224;
     --color-darkmode-on-primary: #000000;
     --color-darkmode-on-secondary: #000000;
     --color-darkmode-on-surface: #ffffff;

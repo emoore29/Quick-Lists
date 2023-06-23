@@ -14,7 +14,7 @@ function App() {
     if (savedList) {
       return JSON.parse(savedList);
     } else {
-      return ["Routine", "To do", "Await"];
+      return ["To do"];
     }
   });
   const [newCardName, setNewCardName] = useState("");
@@ -45,29 +45,49 @@ function App() {
 
   return (
     <div
-      data-theme="default"
-      className="h-full p-16 font-poppins min-h-screen
+      data-theme="cinnamon-bun"
+      className="h-full font-poppins min-h-screen
       bg-background dark:bg-dmBackground 
       text-onBackground dark:text-dmOnBackground/[87%]
       "
     >
-      <div className="">
+      <div
+        className="border-b-2
+      border-b-onBackground/5 
+      dark:border-b-dmOnBackground/5 
+      "
+      >
         <section
           id="header"
-          className="mb-24 flex justify-between items-center"
+          className="px-10 py-4 w-full m-auto
+          flex justify-between items-center
+          "
         >
-          <h1 className="text-4xl font-normal">
-            <span className="text-primary dark:text-dmPrimary">{day}</span>
-            <span className="text-4xl"> {dateString}</span>
-          </h1>
+          <div className="flex flex-col items-center gap-2">
+            <h1 className="text-3xl font-normal">
+              <span className="text-primary dark:text-dmPrimary">
+                {day + " "}
+              </span>
+              <span>{dateString + " "}</span>
+              <span className="opacity-60 text-lg">
+                {dateTime.toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+            </h1>
+          </div>
+
           <div className="flex items-center">
-            <ThemeSwitch secondaryColor="var(--color-secondary)" />
-            <h1 className="">{dateTime.toLocaleTimeString()}</h1>
+            <ThemeSwitch
+              color="var(--color-primary)"
+              dmColor="var(--color-darkmode-primary)"
+            />
           </div>
         </section>
       </div>
 
-      <div className="grid grid-cols-4 gap-12 max-w-[90%] mb-12">
+      <div className="mx-auto p-10 grid grid-cols-5 gap-3 w-full">
         {cardList.map((cardName) => (
           <List
             cardList={cardList}

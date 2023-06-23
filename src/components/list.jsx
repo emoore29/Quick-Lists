@@ -94,9 +94,12 @@ export default function List({ listName, cardList, setCardList }) {
   return (
     <section
       id="list"
-      className="p-5 text-left min-h-[350px] w-full min-w-[350px] 
-      text-lg border-solid rounded-lg
-      bg-surface dark:bg-dmSurface shadow-lightSm dark:shadow-darkSm"
+      className="relative p-5 text-left min-h-[350px] w-full
+      text-lg 
+      border-solid rounded-lg border-2
+      border-onBackground/5 dark:border-dmOnBackground/5
+      bg-surface dark:bg-dmSurface
+      hover:shadow-lightSm dark:hover:shadow-darkSm"
     >
       <div
         className="flex items-center gap-2 mb-4 
@@ -203,41 +206,42 @@ export default function List({ listName, cardList, setCardList }) {
           </li>
         ))}
       </ul>
-      <div
-        id="menu"
-        className="relative flex align-end justify-end text-sm opacity-[87%] "
-      >
+      <div id="menu" className="absolute bottom-5 right-5 text-sm">
         {isMenuVisible && (
-          <div className="absolute bottom-8 p-4 rounded-md bg-light dark:text-dark-shade">
+          <div
+            className="absolute bottom-8 right-2 p-4 rounded-md
+            w-56
+          bg-background shadow-lightSm 
+          dark:text-dmOnSurface dark:bg-dmRaisedSurface"
+          >
             <ul>
-              {listName !== "Await" &&
-                listName !== "Routine" &&
-                listName !== "To do" && (
-                  <li className="p-1 w-full hover:text-accent">
-                    <button className="w-full text-left" onClick={deleteCard}>
-                      Delete
-                    </button>
-                  </li>
-                )}
-              <li className="p-1 w-full hover:text-accent">
-                <button className="w-full text-left" onClick={resetList}>
-                  Uncheck all
+              <li className="p-1 w-full hover:text-secondary">
+                <button className="w-full text-left" onClick={deleteCard}>
+                  <span className="opacity-[87%]">Delete</span>
                 </button>
               </li>
-              <li className="p-1 w-full hover:text-accent">
+
+              <li className="p-1 w-full hover:text-secondary">
+                <button className="w-full text-left" onClick={resetList}>
+                  <span className="opacity-[87%]">Uncheck all</span>
+                </button>
+              </li>
+              <li className="p-1 w-full hover:text-secondary">
                 <button
                   className="w-full text-left"
                   onClick={deleteAllListItems}
                 >
-                  Delete all
+                  <span className="opacity-[87%]">Delete all</span>
                 </button>
               </li>
-              <li className="p-1 w-full hover:text-accent">
+              <li className="p-1 w-full hover:text-secondary">
                 <button
                   className="w-full text-left"
                   onClick={clearAllCompletedItems}
                 >
-                  Clear all completed items
+                  <span className="opacity-[87%]">
+                    Clear all completed items
+                  </span>
                 </button>
               </li>
             </ul>
