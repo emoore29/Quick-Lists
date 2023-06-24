@@ -1,19 +1,53 @@
 @import url("https://fonts.googleapis.com/css2?family=Lateef:wght@200;300;400;500;600;700;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html[data-theme="default"] {
-    --color-esther: 34, 39, 46;
-    --color-maximus: 45, 51, 59;
-    --color-linx: 34, 39, 46;
+  div[data-theme="plain"] {
+    /* LIGHT MODE */
+    --color-primary: #6200ee;
+    --color-secondary: #03dac6;
+    --color-background: #fefefe;
+    --color-surface: #ffffff;
+    --color-on-background: 0, 0, 0;
+    --color-on-primary: #ffffff;
+    --color-on-secondary: #000000;
+    --color-on-surface: 0, 0, 0;
+    /* DARK MODE */
+    --color-darkmode-primary: #bb86fc;
+    --color-darkmode-secondary: #03dac6;
+    --color-darkmode-background: #121212;
+    --color-darkmode-surface: #1e1e1e;
+    --color-darkmode-raised-surface: #292929;
+    --color-darkmode-on-background: 255, 255, 255;
+    --color-darkmode-on-primary: #000000;
+    --color-darkmode-on-secondary: #000000;
+    --color-darkmode-on-surface: 255, 255, 255;
   }
 
-  html[data-theme="neon"] {
-    --color-esther: 20, 61, 42;
-    --color-maximus: 13, 82, 66;
-    --color-linx: 20, 82, 11;
+  div[data-theme="cinnamon-bun"] {
+    /* LIGHT MODE */
+    --color-primary: #bf7d3a;
+    --color-secondary: #d36b2d;
+    --color-background: #f5ebe0;
+    --color-surface: #f5ebe0;
+    --color-on-background: 20, 18, 16;
+    --color-on-primary: #ffffff;
+    --color-on-secondary: #000000;
+    --color-on-surface: 0, 0, 0;
+    /* DARK MODE */
+    --color-darkmode-primary: #b28253;
+    --color-darkmode-secondary: #03dac6;
+    --color-darkmode-background: #141210;
+    --color-darkmode-surface: 34, 31, 28;
+    --color-darkmode-raised-surface: #38342e;
+    --color-darkmode-on-background: 245, 235, 224;
+    --color-darkmode-on-primary: #000000;
+    --color-darkmode-on-secondary: #000000;
+    --color-darkmode-on-surface: 255, 255, 255;
   }
 }
