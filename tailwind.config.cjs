@@ -8,9 +8,7 @@ module.exports = {
       colors: {
         // LIGHT MODE
         primary: "var(--color-primary)",
-        primaryVariant: "var(--color-primary-variant)",
         secondary: "var(--color-secondary)",
-        secondaryVariant: "var(--color-secondary-variant)",
         background: "var(--color-background)",
         surface: "var(--color-surface)",
         onBackground: "rgb(var(--color-on-background), <alpha-value>)",
@@ -19,10 +17,9 @@ module.exports = {
         onSurface: "rgb(var(--color-on-surface), <alpha-value>)",
         // DARK MODE
         dmPrimary: "var(--color-darkmode-primary)",
-        dmPrimaryVariant: "var(--color-darkmode-primary-variant)",
         dmSecondary: "var(--color-darkmode-secondary)",
         dmBackground: "var(--color-darkmode-background)",
-        dmSurface: "var(--color-darkmode-surface)",
+        dmSurface: "rgb(var(--color-darkmode-surface), <alpha-value>)",
         dmRaisedSurface: "var(--color-darkmode-raised-surface)",
         dmOnBackground:
           "rgb(var(--color-darkmode-on-background), <alpha-value>)",

@@ -107,7 +107,7 @@ export default function List({ listName, cardList, setCardList }) {
       >
         <h1 className="font-normal opacity-[87%]">{listName}</h1>
         <button
-          className="hover:text-secondary"
+          className="hover:text-primary dark:hover:text-dmPrimary"
           type="button"
           onClick={() => setUpdate(!update)}
         >
@@ -123,7 +123,10 @@ export default function List({ listName, cardList, setCardList }) {
               value={listInput}
               onChange={(e) => setListInput(e.target.value)}
             />
-            <button className="hover:text-secondary" type="submit">
+            <button
+              className="hover:text-primary dark:hover:text-dmPrimary"
+              type="submit"
+            >
               <Plus />
             </button>
           </div>
@@ -135,27 +138,22 @@ export default function List({ listName, cardList, setCardList }) {
             key={index}
             className={`p-[0.1rem] font-roboto ${
               item.completed &&
-              "line-through text-onSurface/30 dark:text-dmOnSurface opacity-[38%]"
+              "line-through text-onSurface dark:text-dmOnSurface opacity-[38%]"
             }`}
           >
             <input
               type="checkbox"
               className="mr-2 border-1 rounded-md
-              text-primary dark:text-dmPrimary
-              bg-background
+              border-onSurface/[38%] dark:border-dmOnSurface/[38%]
+              bg-background text-primary
+              dark:bg-dmBackground dark:text-dmBackground
               focus:ring-1 focus:ring-offset-1
-//            focus:ring-secondary focus:ring-offset-background dark:focus:ring-offset-dmBackground"
+              focus:ring-primary dark:focus:ring-dmPrimary
+              focus:ring-offset-background 
+              dark:focus:ring-offset-dmBackground"
               checked={item.completed}
               onChange={() => handleComplete(index)}
             />
-
-            {/* // form-checkbox mr-2 border-0 rounded-md 
-//               bg-accent ***dark:bg-light*** breaks text color
-//               active:bg-light dark:active:bg-dark
-//               text-light dark:text-dark
-//               checked:accent-light dark:checked:accent-dark
-//               focus:ring-1 focus:ring-offset-1
-//               focus:ring-accent focus:ring-offset-light dark:focus:ring-offset-dark */}
             {item.edit === true && (
               <form onSubmit={(e) => handleUpdate(e, index)}>
                 <input
@@ -215,18 +213,18 @@ export default function List({ listName, cardList, setCardList }) {
           dark:text-dmOnSurface dark:bg-dmRaisedSurface"
           >
             <ul>
-              <li className="p-1 w-full hover:text-secondary">
+              <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button className="w-full text-left" onClick={deleteCard}>
-                  <span className="opacity-[87%]">Delete</span>
+                  <span className="opacity-[87%]">Delete card</span>
                 </button>
               </li>
 
-              <li className="p-1 w-full hover:text-secondary">
+              <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button className="w-full text-left" onClick={resetList}>
                   <span className="opacity-[87%]">Uncheck all</span>
                 </button>
               </li>
-              <li className="p-1 w-full hover:text-secondary">
+              <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button
                   className="w-full text-left"
                   onClick={deleteAllListItems}
@@ -234,7 +232,7 @@ export default function List({ listName, cardList, setCardList }) {
                   <span className="opacity-[87%]">Delete all</span>
                 </button>
               </li>
-              <li className="p-1 w-full hover:text-secondary">
+              <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button
                   className="w-full text-left"
                   onClick={clearAllCompletedItems}
@@ -250,7 +248,7 @@ export default function List({ listName, cardList, setCardList }) {
         <button
           id="kebab-menu"
           onClick={() => setIsMenuVisible(!isMenuVisible)}
-          className="hover:text-accent dark:hover:text-medium-shade"
+          className="hover:text-primary dark:hover:text-dmPrimary"
         >
           <KebabMenu />
         </button>

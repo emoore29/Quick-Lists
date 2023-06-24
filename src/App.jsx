@@ -99,14 +99,14 @@ function App() {
         <div className="mb-4">
           {newCard ? (
             <button
-              className="hover:text-secondary"
+              className="hover:text-primary dark:hover:text-dmPrimary"
               onClick={() => setNewCard(false)}
             >
               <CancelX />
             </button>
           ) : (
             <button
-              className="hover:text-secondary"
+              className="hover:text-primary dark:hover:text-dmPrimary"
               onClick={() => setNewCard(true)}
             >
               <SquaresPlus />
@@ -121,7 +121,10 @@ function App() {
                 value={newCardName}
                 onChange={(e) => setNewCardName(e.target.value)}
               ></input>
-              <button className="hover:text-secondary" type="submit">
+              <button
+                className="hover:text-primary dark:hover:text-dmPrimary"
+                type="submit"
+              >
                 <Plus />
               </button>
             </form>
