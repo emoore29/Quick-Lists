@@ -88,14 +88,15 @@ function App() {
       </div>
 
       <div className="mx-auto p-10 grid grid-cols-5 gap-3 w-full">
-        {cardList.map((cardName) => (
+        {cardList.map((cardName, index) => (
           <List
+            key={cardName + index}
             cardList={cardList}
             setCardList={setCardList}
             listName={cardName}
           />
         ))}
-        {/* {cardList.length % 3 === 0 && <div></div>} */}
+
         <div className="mb-4">
           {newCard ? (
             <button
