@@ -88,8 +88,9 @@ function App() {
       </div>
 
       <div className="mx-auto p-10 grid grid-cols-5 gap-3 w-full">
-        {cardList.map((cardName) => (
+        {cardList.map((cardName, index) => (
           <List
+            key={cardName + index}
             cardList={cardList}
             setCardList={setCardList}
             listName={cardName}
