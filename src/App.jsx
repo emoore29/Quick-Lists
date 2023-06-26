@@ -96,7 +96,7 @@ function App() {
             listName={cardName}
           />
         ))}
-        {/* {cardList.length % 3 === 0 && <div></div>} */}
+
         <div className="mb-4">
           {newCard ? (
             <button
