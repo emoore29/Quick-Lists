@@ -39,6 +39,8 @@ function App() {
     const newCardList = [...cardList];
     newCardList.push(newCardName);
     setCardList(newCardList);
+
+    // reset values for adding a new card to default
     setNewCardName("");
     setNewCard(false);
   }
@@ -91,6 +93,7 @@ function App() {
         {cardList.map((cardName, index) => (
           <List
             key={cardName + index}
+            index={index}
             cardList={cardList}
             setCardList={setCardList}
             listName={cardName}

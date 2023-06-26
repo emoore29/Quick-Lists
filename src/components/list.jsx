@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { KebabMenu, DoneSvg, EditSvg, Plus } from "./svgs";
-export default function List({ listName, cardList, setCardList }) {
+export default function List({ listName, cardList, setCardList, index }) {
   // If there are items saved in local storage, sets list to the saved list, otherwise list is empty by default
   const [list, setList] = useState(() => {
     const savedList = localStorage.getItem(listName);
@@ -46,10 +46,12 @@ export default function List({ listName, cardList, setCardList }) {
   // delete a card + the corresponding list
   const deleteCard = () => {
     const newCardList = [...cardList];
-    const updatedCardList = newCardList.filter((item) => item !== listName);
-    setCardList(updatedCardList);
-    localStorage.removeItem(listName);
+    newCardList.splice(index, 1); // Removes card from list based on index to avoid deleting cards with the same name
+    setCardList(newCardList); // useEff in App.jsx will update the list in local storage after updating it here in state
     setIsMenuVisible(false);
+
+    // const updatedCardList = newCardList.filter((item) => item !== listName);
+    // localStorage.removeItem(listName);
   };
 
   // Reset all items in a list
