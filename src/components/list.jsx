@@ -15,11 +15,16 @@ export default function List({ listName, cardList, setCardList, index }) {
   const [listInput, setListInput] = useState("");
   const [updateItem, setUpdateItem] = useState("");
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [itemHoverIndex, setItemHoverIndex] = useState(false);
 
   // Adds new item to list
   const handleSubmit = (e) => {
     e.preventDefault();
-    setList([...list, { text: listInput, completed: false, edit: false }]);
+    setList([
+      ...list,
+      { text: listInput, completed: false, edit: false, prioritise: false },
+    ]);
     setListInput("");
   };
 
@@ -40,6 +45,13 @@ export default function List({ listName, cardList, setCardList, index }) {
   const handleComplete = (index) => {
     const newList = [...list];
     newList[index].completed = !newList[index].completed;
+    setList(newList);
+  };
+
+  // Mark item as a priority (for highlighting)
+  const handlePrioritise = (index) => {
+    const newList = [...list];
+    newList[index].prioritise = !newList[index].prioritise;
     setList(newList);
   };
 
@@ -102,46 +114,25 @@ export default function List({ listName, cardList, setCardList, index }) {
       border-onBackground/5 dark:border-dmOnBackground/5
       bg-surface dark:bg-dmSurface
       hover:shadow-lightSm dark:hover:shadow-darkSm"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <div
         className="flex items-center gap-2 mb-4 
       text-onSurface dark:text-dmOnSurface"
       >
         <h1 className="font-normal opacity-[87%]">{listName}</h1>
-        <button
-          className="hover:text-primary dark:hover:text-dmPrimary"
-          type="button"
-          onClick={() => setUpdate(!update)}
-        >
-          {!update ? <EditSvg /> : <DoneSvg />}
-        </button>
       </div>
-      <form onSubmit={handleSubmit}>
-        {update && (
-          <div className="flex justify-center mb-4">
-            <input
-              className="rounded h-7 dark:text-onBackground"
-              type="text"
-              value={listInput}
-              onChange={(e) => setListInput(e.target.value)}
-            />
-            <button
-              className="hover:text-primary dark:hover:text-dmPrimary"
-              type="submit"
-            >
-              <Plus />
-            </button>
-          </div>
-        )}
-      </form>
       <ul className="mb-8 font-light text-sm  opacity-[87%]">
         {list.map((item, index) => (
           <li
-            key={index}
+            key={index + item.text}
             className={`p-[0.1rem] font-roboto ${
               item.completed &&
               "line-through text-onSurface dark:text-dmOnSurface opacity-[38%]"
             }`}
+            onMouseEnter={() => setItemHoverIndex(index)}
+            onMouseLeave={() => setItemHoverIndex(null)}
           >
             <input
               type="checkbox"
@@ -171,8 +162,12 @@ export default function List({ listName, cardList, setCardList, index }) {
                 </button>
               </form>
             )}
-            {item.edit === false && item.text}
-            {update && (
+            {item.edit === false && (
+              <span className={item.prioritise && "text-primary"}>
+                {item.text}
+              </span>
+            )}
+            {itemHoverIndex === index && (
               <>
                 <button
                   className="ml-2 hover:text-accent"
@@ -201,10 +196,38 @@ export default function List({ listName, cardList, setCardList, index }) {
                 >
                   {item.edit === false ? "Edit" : "Cancel Edit"}
                 </button>
+                <button onClick={() => handlePrioritise(index)}>
+                  Prioritise
+                </button>
               </>
             )}
           </li>
         ))}
+        {hover && (
+          <li>
+            <form onSubmit={handleSubmit}>
+              <div className="flex justify-center mb-4">
+                <input
+                  className="rounded h-7 border-none
+                  focus:outline-none focus:ring-0
+                  bg-surface text-onSurface 
+                  dark:bg-dmSurface dark:text-dmOnSurface
+                  font-roboto font-light"
+                  type="text"
+                  value={listInput}
+                  placeholder="Add item"
+                  onChange={(e) => setListInput(e.target.value)}
+                />
+                {/* <button
+                  className="hover:text-primary dark:hover:text-dmPrimary"
+                  type="submit"
+                >
+                  <Plus />
+                </button> */}
+              </div>
+            </form>
+          </li>
+        )}
       </ul>
       <div id="menu" className="absolute bottom-5 right-5 text-sm">
         {isMenuVisible && (
@@ -223,7 +246,7 @@ export default function List({ listName, cardList, setCardList, index }) {
 
               <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button className="w-full text-left" onClick={resetList}>
-                  <span className="opacity-[87%]">Uncheck all</span>
+                  <span className="opacity-[87%]">Uncheck all items</span>
                 </button>
               </li>
               <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
@@ -231,7 +254,7 @@ export default function List({ listName, cardList, setCardList, index }) {
                   className="w-full text-left"
                   onClick={deleteAllListItems}
                 >
-                  <span className="opacity-[87%]">Delete all</span>
+                  <span className="opacity-[87%]">Delete all items</span>
                 </button>
               </li>
               <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
@@ -240,7 +263,7 @@ export default function List({ listName, cardList, setCardList, index }) {
                   onClick={clearAllCompletedItems}
                 >
                   <span className="opacity-[87%]">
-                    Clear all completed items
+                    Delete all completed items
                   </span>
                 </button>
               </li>
