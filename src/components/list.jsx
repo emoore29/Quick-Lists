@@ -21,7 +21,10 @@ export default function List({ listName, cardList, setCardList, index }) {
   // Adds new item to list
   const handleSubmit = (e) => {
     e.preventDefault();
-    setList([...list, { text: listInput, completed: false, edit: false }]);
+    setList([
+      ...list,
+      { text: listInput, completed: false, edit: false, prioritise: false },
+    ]);
     setListInput("");
   };
 
@@ -42,6 +45,13 @@ export default function List({ listName, cardList, setCardList, index }) {
   const handleComplete = (index) => {
     const newList = [...list];
     newList[index].completed = !newList[index].completed;
+    setList(newList);
+  };
+
+  // Mark item as a priority (for highlighting)
+  const handlePrioritise = (index) => {
+    const newList = [...list];
+    newList[index].prioritise = !newList[index].prioritise;
     setList(newList);
   };
 
@@ -179,7 +189,11 @@ export default function List({ listName, cardList, setCardList, index }) {
                 </button>
               </form>
             )}
-            {item.edit === false && <span>{item.text}</span>}
+            {item.edit === false && (
+              <span className={item.prioritise && "text-primary"}>
+                {item.text}
+              </span>
+            )}
             {itemHoverIndex === index && (
               <>
                 <button
@@ -208,6 +222,9 @@ export default function List({ listName, cardList, setCardList, index }) {
                   onClick={() => handleEdit(index)}
                 >
                   {item.edit === false ? "Edit" : "Cancel Edit"}
+                </button>
+                <button onClick={() => handlePrioritise(index)}>
+                  Prioritise
                 </button>
               </>
             )}
