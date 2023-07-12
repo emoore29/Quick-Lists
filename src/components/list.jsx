@@ -16,6 +16,7 @@ export default function List({ listName, cardList, setCardList, index }) {
   const [updateItem, setUpdateItem] = useState("");
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [hover, setHover] = useState(false);
+  const [itemHoverIndex, setItemHoverIndex] = useState(false);
 
   // Adds new item to list
   const handleSubmit = (e) => {
@@ -147,6 +148,8 @@ export default function List({ listName, cardList, setCardList, index }) {
               item.completed &&
               "line-through text-onSurface dark:text-dmOnSurface opacity-[38%]"
             }`}
+            onMouseEnter={() => setItemHoverIndex(index)}
+            onMouseLeave={() => setItemHoverIndex(null)}
           >
             <input
               type="checkbox"
@@ -176,8 +179,8 @@ export default function List({ listName, cardList, setCardList, index }) {
                 </button>
               </form>
             )}
-            {item.edit === false && item.text}
-            {hover && (
+            {item.edit === false && <span>{item.text}</span>}
+            {itemHoverIndex === index && (
               <>
                 <button
                   className="ml-2 hover:text-accent"
