@@ -15,6 +15,7 @@ export default function List({ listName, cardList, setCardList, index }) {
   const [listInput, setListInput] = useState("");
   const [updateItem, setUpdateItem] = useState("");
   const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [hover, setHover] = useState(false);
 
   // Adds new item to list
   const handleSubmit = (e) => {
@@ -102,19 +103,23 @@ export default function List({ listName, cardList, setCardList, index }) {
       border-onBackground/5 dark:border-dmOnBackground/5
       bg-surface dark:bg-dmSurface
       hover:shadow-lightSm dark:hover:shadow-darkSm"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
       <div
         className="flex items-center gap-2 mb-4 
       text-onSurface dark:text-dmOnSurface"
       >
         <h1 className="font-normal opacity-[87%]">{listName}</h1>
-        <button
-          className="hover:text-primary dark:hover:text-dmPrimary"
-          type="button"
-          onClick={() => setUpdate(!update)}
-        >
-          {!update ? <EditSvg /> : <DoneSvg />}
-        </button>
+        {hover && (
+          <button
+            className="hover:text-primary dark:hover:text-dmPrimary"
+            type="button"
+            onClick={() => setUpdate(!update)}
+          >
+            {!update ? <EditSvg /> : <DoneSvg />}
+          </button>
+        )}
       </div>
       <form onSubmit={handleSubmit}>
         {update && (
@@ -172,7 +177,7 @@ export default function List({ listName, cardList, setCardList, index }) {
               </form>
             )}
             {item.edit === false && item.text}
-            {update && (
+            {hover && (
               <>
                 <button
                   className="ml-2 hover:text-accent"
