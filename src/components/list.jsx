@@ -177,7 +177,11 @@ export default function List({ listName, cardList, setCardList, index }) {
                 </button>
               </form>
             ) : (
-              <span className={item.prioritise && "text-primary"}>
+              <span
+                className={
+                  item.prioritise && "text-primary dark:text-dmPrimary"
+                }
+              >
                 {item.text}
               </span>
             )}

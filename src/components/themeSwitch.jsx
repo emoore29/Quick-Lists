@@ -22,7 +22,7 @@ export default function ThemeSwitch({ color, dmColor }) {
           onChange={toggleDarkMode}
           moonColor={dmColor}
           sunColor={color}
-          size={40}
+          size={30}
         />
       </div>
     </>

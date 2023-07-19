@@ -5,6 +5,7 @@ import "./index.css";
 import ThemeSwitch from "./components/themeSwitch";
 import List from "./components/list";
 import { day, dateString } from "./utils/dates";
+import ColorSwitch from "./components/colorSwitch";
 
 function App() {
   // value = current date and time
@@ -19,6 +20,7 @@ function App() {
   });
   const [newCardName, setNewCardName] = useState("");
   const [newCard, setNewCard] = useState(false);
+  const [theme, setTheme] = useState("plain");
 
   // Updates time every second and sets state accordingly. dateTime is used in the Clock.
   useEffect(() => {
@@ -47,7 +49,7 @@ function App() {
 
   return (
     <div
-      data-theme="cinnamon-bun"
+      data-theme={theme}
       className="h-full font-poppins min-h-screen
       bg-background dark:bg-dmBackground 
       text-onBackground dark:text-dmOnBackground/[87%]
@@ -80,7 +82,8 @@ function App() {
             </h1>
           </div>
 
-          <div className="flex items-center">
+          <div className="flex items-center gap-5">
+            <ColorSwitch />
             <ThemeSwitch
               color="var(--color-primary)"
               dmColor="var(--color-darkmode-primary)"
