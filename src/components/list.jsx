@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { KebabMenu, DoneSvg, EditSvg, Plus } from "./svgs";
+import { KebabMenu, Star, Edit, Delete, CancelX, DoneSvg } from "./svgs";
 export default function List({ listName, cardList, setCardList, index }) {
   // If there are items saved in local storage, sets list to the saved list, otherwise list is empty by default
   const [list, setList] = useState(() => {
@@ -164,10 +164,16 @@ export default function List({ listName, cardList, setCardList, index }) {
                   onChange={(e) => setUpdateItem(e.target.value)}
                 />
                 <button
-                  className="hover:text-accent dark:hover:text-light"
+                  className="hover:text-primary dark:hover:text-dmPrimary"
                   type="submit"
                 >
-                  Submit
+                  <DoneSvg />
+                </button>
+                <button
+                  className="hover:text-primary dark:hover:text-dmPrimary"
+                  onClick={() => handleEdit(index)}
+                >
+                  <CancelX />
                 </button>
               </form>
             ) : (
@@ -177,36 +183,28 @@ export default function List({ listName, cardList, setCardList, index }) {
             )}
             {itemHoverIndex === index && (
               <>
-                <button
-                  className="ml-2 hover:text-accent"
-                  onClick={() => handleDelete(index)}
-                >
-                  <div className="h-4">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 -4 26 26"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-auto h-full"
+                {!item.edit && (
+                  <>
+                    <button
+                      className="ml-2 hover:text-primary dark:hover:text-dmPrimary"
+                      onClick={() => handleDelete(index)}
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                      />
-                    </svg>
-                  </div>
-                </button>
-                <button
-                  className="hover:text-accent"
-                  onClick={() => handleEdit(index)}
-                >
-                  {item.edit === false ? "Edit" : "Cancel Edit"}
-                </button>
-                <button onClick={() => handlePrioritise(index)}>
-                  Prioritise
-                </button>
+                      <Delete />
+                    </button>
+                    <button
+                      className="hover:text-primary dark:hover:text-dmPrimary"
+                      onClick={() => handleEdit(index)}
+                    >
+                      <Edit />
+                    </button>
+                    <button
+                      className="hover:text-primary dark:hover:text-dmPrimary"
+                      onClick={() => handlePrioritise(index)}
+                    >
+                      <Star />
+                    </button>
+                  </>
+                )}
               </>
             )}
           </li>
@@ -215,19 +213,18 @@ export default function List({ listName, cardList, setCardList, index }) {
         {hover && (
           <li>
             <form onSubmit={handleSubmit}>
-              <div className="flex justify-center mb-4">
-                <input
-                  className="rounded h-7 border-none
+              <input
+                className="rounded border-none
+                p-0 w-full
                   focus:outline-none focus:ring-0
                   bg-surface text-onSurface 
                   dark:bg-dmSurface dark:text-dmOnSurface
                   font-roboto font-light"
-                  type="text"
-                  value={listInput}
-                  placeholder="Add item"
-                  onChange={(e) => setListInput(e.target.value)}
-                />
-              </div>
+                type="text"
+                value={listInput}
+                placeholder="Add item"
+                onChange={(e) => setListInput(e.target.value)}
+              />
             </form>
           </li>
         )}
