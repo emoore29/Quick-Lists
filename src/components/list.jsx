@@ -13,7 +13,7 @@ export default function List({ listName, cardList, setCardList, index }) {
   const [update, setUpdate] = useState(false);
   // inputValue is a new item in the list
   const [listInput, setListInput] = useState("");
-  const [updateItem, setUpdateItem] = useState("");
+  const [updateItem, setUpdateItem] = useState(""); // string from an item in the list, set whenever user changes item
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [hover, setHover] = useState(false);
   const [itemHoverIndex, setItemHoverIndex] = useState(false);
@@ -91,7 +91,7 @@ export default function List({ listName, cardList, setCardList, index }) {
   const handleUpdate = (e, index) => {
     e.preventDefault();
     const newList = [...list];
-    newList[index].text = updateItem;
+    newList[index].text = updateItem !== "" ? updateItem : newList[index].text;
     newList[index].edit = false;
     setUpdateItem("");
     setList(newList);
@@ -147,9 +147,18 @@ export default function List({ listName, cardList, setCardList, index }) {
               checked={item.completed}
               onChange={() => handleComplete(index)}
             />
-            {item.edit === true && (
+            {/* ITEM EDIT */}
+            {item.edit === true ? (
               <form onSubmit={(e) => handleUpdate(e, index)}>
                 <input
+                  className="rounded h-7 focus:outline-none
+                  border-none focus:ring-1
+              focus:ring-primary dark:focus:ring-dmPrimary
+              focus:ring-offset-background 
+              dark:focus:ring-offset-dmBackground
+                bg-surface text-onSurface 
+                dark:bg-dmSurface dark:text-dmOnSurface
+                font-roboto font-light"
                   type="text"
                   defaultValue={item.text}
                   onChange={(e) => setUpdateItem(e.target.value)}
@@ -161,8 +170,7 @@ export default function List({ listName, cardList, setCardList, index }) {
                   Submit
                 </button>
               </form>
-            )}
-            {item.edit === false && (
+            ) : (
               <span className={item.prioritise && "text-primary"}>
                 {item.text}
               </span>
@@ -203,6 +211,7 @@ export default function List({ listName, cardList, setCardList, index }) {
             )}
           </li>
         ))}
+        {/* ADD ITEM */}
         {hover && (
           <li>
             <form onSubmit={handleSubmit}>
@@ -218,12 +227,6 @@ export default function List({ listName, cardList, setCardList, index }) {
                   placeholder="Add item"
                   onChange={(e) => setListInput(e.target.value)}
                 />
-                {/* <button
-                  className="hover:text-primary dark:hover:text-dmPrimary"
-                  type="submit"
-                >
-                  <Plus />
-                </button> */}
               </div>
             </form>
           </li>
