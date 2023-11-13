@@ -108,45 +108,24 @@ export default function List({ listName, cardList, setCardList, index }) {
   return (
     <section
       id="list"
-      className="relative p-5 text-left min-h-[350px] w-full
+      className="relative p-5 text-center min-h-[350px] w-1/4
       text-lg 
-      border-solid rounded-lg border-2
-      border-onBackground/5 dark:border-dmOnBackground/5
       bg-surface dark:bg-dmSurface
-      hover:shadow-lightSm dark:hover:shadow-darkSm"
+      "
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <div
-        className="flex items-center gap-2 mb-4 
-      text-onSurface dark:text-dmOnSurface"
-      >
-        <h1 className="font-normal opacity-[87%]">{listName}</h1>
-      </div>
-      <ul className="mb-8 font-light text-sm  opacity-[87%]">
+      <ul className="mb-8 font-light text-2xl opacity-[87%]">
         {list.map((item, index) => (
           <li
             key={index + item.text}
-            className={`p-[0.1rem] font-roboto ${
+            className={`p-1 font-roboto relative ${
               item.completed &&
-              "line-through text-onSurface dark:text-dmOnSurface opacity-[38%]"
+              "line-through text-onSurface dark:text-dmOnSurface opacity-[38%] "
             }`}
             onMouseEnter={() => setItemHoverIndex(index)}
             onMouseLeave={() => setItemHoverIndex(null)}
           >
-            <input
-              type="checkbox"
-              className="mr-2 border-1 rounded-md
-              border-onSurface/[38%] dark:border-dmOnSurface/[38%]
-              bg-background text-primary
-              dark:bg-dmBackground dark:text-dmBackground
-              focus:ring-1 focus:ring-offset-1
-              focus:ring-primary dark:focus:ring-dmPrimary
-              focus:ring-offset-background 
-              dark:focus:ring-offset-dmBackground"
-              checked={item.completed}
-              onChange={() => handleComplete(index)}
-            />
             {/* ITEM EDIT */}
             {item.edit === true ? (
               <form onSubmit={(e) => handleUpdate(e, index)}>
@@ -181,31 +160,42 @@ export default function List({ listName, cardList, setCardList, index }) {
                 {item.text}
               </span>
             )}
-            {itemHoverIndex === index && (
-              <>
-                {!item.edit && (
-                  <>
-                    <button
-                      className="ml-2 hover:text-primary dark:hover:text-dmPrimary"
-                      onClick={() => handleDelete(index)}
-                    >
-                      <Delete />
-                    </button>
-                    <button
-                      className="hover:text-primary dark:hover:text-dmPrimary"
-                      onClick={() => handleEdit(index)}
-                    >
-                      <Edit />
-                    </button>
-                    <button
-                      className="hover:text-primary dark:hover:text-dmPrimary"
-                      onClick={() => handlePrioritise(index)}
-                    >
-                      <Star />
-                    </button>
-                  </>
-                )}
-              </>
+            {itemHoverIndex === index && !item.edit ? (
+              <div className="absolute right-0 top-0">
+                <input
+                  type="checkbox"
+                  className="border-1 rounded-md
+              border-onSurface/[38%] dark:border-dmOnSurface/[38%]
+              bg-background text-primary
+              dark:bg-dmBackground dark:text-dmBackground
+              focus:ring-1 focus:ring-offset-1
+              focus:ring-primary dark:focus:ring-dmPrimary
+              focus:ring-offset-background 
+              dark:focus:ring-offset-dmBackground"
+                  checked={item.completed}
+                  onChange={() => handleComplete(index)}
+                />
+                <button
+                  className="ml-2 hover:text-primary dark:hover:text-dmPrimary"
+                  onClick={() => handleDelete(index)}
+                >
+                  <Delete />
+                </button>
+                <button
+                  className="hover:text-primary dark:hover:text-dmPrimary"
+                  onClick={() => handleEdit(index)}
+                >
+                  <Edit />
+                </button>
+                <button
+                  className="hover:text-primary dark:hover:text-dmPrimary"
+                  onClick={() => handlePrioritise(index)}
+                >
+                  <Star />
+                </button>
+              </div>
+            ) : (
+              ""
             )}
           </li>
         ))}
@@ -215,11 +205,13 @@ export default function List({ listName, cardList, setCardList, index }) {
             <form onSubmit={handleSubmit}>
               <input
                 className="rounded border-none
-                p-0 w-full
+                p-0 w-auto
                   focus:outline-none focus:ring-0
                   bg-surface text-onSurface 
                   dark:bg-dmSurface dark:text-dmOnSurface
-                  font-roboto font-light"
+                  font-roboto font-light
+                  text-center
+                  "
                 type="text"
                 value={listInput}
                 placeholder="Add item"
@@ -238,12 +230,6 @@ export default function List({ listName, cardList, setCardList, index }) {
           dark:text-dmOnSurface dark:bg-dmRaisedSurface"
           >
             <ul>
-              <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
-                <button className="w-full text-left" onClick={deleteCard}>
-                  <span className="opacity-[87%]">Delete card</span>
-                </button>
-              </li>
-
               <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button className="w-full text-left" onClick={resetList}>
                   <span className="opacity-[87%]">Uncheck all items</span>
