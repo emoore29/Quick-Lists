@@ -115,11 +115,11 @@ export default function List({ listName, cardList, setCardList, index }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <ul className="mb-8 font-light text-2xl opacity-[87%]">
+      <ul className="mb-8 font-light text-2xl">
         {list.map((item, index) => (
           <li
             key={index + item.text}
-            className={`p-1 font-roboto relative ${
+            className={`p-1 font-roboto relative text-primary dark:text-dmOnBackground ${
               item.completed &&
               "line-through text-onSurface dark:text-dmOnSurface opacity-[38%] "
             }`}
@@ -156,7 +156,11 @@ export default function List({ listName, cardList, setCardList, index }) {
                 </button>
               </form>
             ) : (
-              <span className={item.prioritise && "text-primary"}>
+              <span
+                className={
+                  item.prioritise && "text-secondary dark:text-dmPrimary"
+                }
+              >
                 {item.text}
               </span>
             )}

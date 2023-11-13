@@ -47,7 +47,7 @@ function App() {
 
   return (
     <div
-      data-theme="cinnamon-bun"
+      data-theme="cute"
       className="h-full font-poppins min-h-screen
       bg-background dark:bg-dmBackground 
       text-onBackground dark:text-dmOnBackground/[87%]
