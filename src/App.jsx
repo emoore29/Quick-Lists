@@ -47,49 +47,41 @@ function App() {
 
   return (
     <div
-      data-theme="cinnamon-bun"
+      data-theme="cute"
       className="h-full font-poppins min-h-screen
       bg-background dark:bg-dmBackground 
       text-onBackground dark:text-dmOnBackground/[87%]
       "
     >
-      <div
-        className="border-b-2
-      border-b-onBackground/5 
-      dark:border-b-dmOnBackground/5 
-      "
-      >
-        <section
-          id="header"
-          className="px-10 py-4 w-full m-auto
-          flex justify-between items-center
+      <header
+        id="header"
+        className="px-10 py-10 w-full m-auto
+          flex justify-center items-center gap-5
           "
-        >
-          <div className="flex flex-col items-center gap-2">
-            <h1 className="text-3xl font-normal">
-              <span className="text-primary dark:text-dmPrimary">
-                {day + " "}
-              </span>
-              <span>{dateString + " "}</span>
-              <span className="opacity-60 text-lg">
-                {dateTime.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </span>
-            </h1>
-          </div>
+      >
+        <div className="flex flex-col items-center gap-2">
+          <h1 className="text-lg font-normal">
+            <span className="text-primary dark:text-dmPrimary">
+              {day + " "}
+            </span>
+            <span>{dateString + " "}</span>
+            <span className="opacity-60 text-lg">
+              {dateTime.toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+          </h1>
+        </div>
 
-          <div className="flex items-center">
-            <ThemeSwitch
-              color="var(--color-primary)"
-              dmColor="var(--color-darkmode-primary)"
-            />
-          </div>
-        </section>
-      </div>
-
-      <div className="mx-auto p-10 grid grid-cols-5 gap-3 w-full">
+        <div className="flex items-center">
+          <ThemeSwitch
+            color="var(--color-primary)"
+            dmColor="var(--color-darkmode-primary)"
+          />
+        </div>
+      </header>
+      <main className="flex items-center justify-center mx-auto p-10 gap-3 w-full h-full">
         {cardList.map((cardName, index) => (
           <List
             key={cardName + index}
@@ -99,42 +91,7 @@ function App() {
             listName={cardName}
           />
         ))}
-
-        <div className="mb-4">
-          {newCard ? (
-            <button
-              className="hover:text-primary dark:hover:text-dmPrimary"
-              onClick={() => setNewCard(false)}
-            >
-              <CancelX />
-            </button>
-          ) : (
-            <button
-              className="hover:text-primary dark:hover:text-dmPrimary"
-              onClick={() => setNewCard(true)}
-            >
-              <SquaresPlus />
-            </button>
-          )}
-
-          {newCard && (
-            <form onSubmit={addCard} className="mb-4">
-              <input
-                type="text"
-                className="text-sm text-black"
-                value={newCardName}
-                onChange={(e) => setNewCardName(e.target.value)}
-              ></input>
-              <button
-                className="hover:text-primary dark:hover:text-dmPrimary"
-                type="submit"
-              >
-                <Plus />
-              </button>
-            </form>
-          )}
-        </div>
-      </div>
+      </main>
     </div>
   );
 }

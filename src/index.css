@@ -50,4 +50,26 @@
     --color-darkmode-on-secondary: #000000;
     --color-darkmode-on-surface: 255, 255, 255;
   }
+
+  div[data-theme="cute"] {
+    /* LIGHT MODE */
+    --color-primary: #4e1b2b;
+    --color-secondary: #8a1333;
+    --color-background: #e9d6da;
+    --color-surface: #e9d6da;
+    --color-on-background: 138, 19, 51;
+    --color-on-primary: #e9d6da;
+    --color-on-secondary: #47202c;
+    --color-on-surface: 0, 0, 0;
+    /* DARK MODE */
+    --color-darkmode-primary: #ff99b5;
+    --color-darkmode-secondary: #ff99b5;
+    --color-darkmode-background: #47202c;
+    --color-darkmode-surface: 34, 31, 28;
+    --color-darkmode-raised-surface: #47202c;
+    --color-darkmode-on-background: 238, 217, 210;
+    --color-darkmode-on-primary: #000000;
+    --color-darkmode-on-secondary: #000000;
+    --color-darkmode-on-surface: 255, 255, 255;
+  }
 }
