@@ -32,6 +32,7 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         roboto: ["Roboto", "sans-serif"],
         kalam: ["Kalam", "handwriting"],
+        robotoSlab: ["Roboto Slab", "serif"],
       },
       fontWeight: {
         thin: 100,
