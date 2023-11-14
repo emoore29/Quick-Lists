@@ -108,14 +108,23 @@ export default function List({ listName, cardList, setCardList, index }) {
   return (
     <section
       id="list"
-      className="relative p-5 text-center min-h-[350px] w-1/4
-      text-lg 
-      bg-background dark:bg-dmSurface
-      "
+      className={`relative p-5
+      ${
+        listName !== "Primary"
+          ? "min-w-full bg-surface dark:bg-dmRaisedSurface text-left"
+          : "min-w-[350px] bg-background dark:bg-dmBackground text-center"
+      }
+      min-h-[350px] w-1/4     
+      `}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <ul className="mb-8 font-light text-2xl">
+      <h1 className="text-center mb-2">{listName !== "Primary" && listName}</h1>
+      <ul
+        className={`mb-8 font-light ${
+          listName === "Primary" ? "text-2xl" : "text-md list-disc"
+        }`}
+      >
         {list.map((item, index) => (
           <li
             key={index + item.text}
@@ -203,19 +212,21 @@ export default function List({ listName, cardList, setCardList, index }) {
             )}
           </li>
         ))}
-        {/* ADD ITEM */}
         {hover && (
           <li>
             <form onSubmit={handleSubmit}>
               <input
-                className="rounded border-none
+                className={`rounded border-none
                 p-0 w-auto
                   focus:outline-none focus:ring-0
-                  bg-surface text-onSurface 
-                  dark:bg-dmSurface dark:text-dmOnSurface
+                  text-onSurface 
+                   dark:text-dmOnSurface
                   font-roboto font-light
-                  text-center
-                  "
+                  ${
+                    listName !== "Primary"
+                      ? "text-left dark:bg-dmRaisedSurface bg-surface"
+                      : "text-center dark:bg-dmBackground bg-background"
+                  }`}
                 type="text"
                 value={listInput}
                 placeholder="Add item"
@@ -234,6 +245,11 @@ export default function List({ listName, cardList, setCardList, index }) {
           dark:text-dmOnSurface dark:bg-dmRaisedSurface"
           >
             <ul>
+              <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
+                <button className="w-full text-left" onClick={deleteCard}>
+                  <span className="opacity-[87%]">Delete card</span>
+                </button>
+              </li>
               <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button className="w-full text-left" onClick={resetList}>
                   <span className="opacity-[87%]">Uncheck all items</span>

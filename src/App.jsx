@@ -14,7 +14,7 @@ function App() {
     if (savedList) {
       return JSON.parse(savedList);
     } else {
-      return ["To do"];
+      return ["Primary"];
     }
   });
   const [newCardName, setNewCardName] = useState("");
@@ -84,7 +84,7 @@ function App() {
       <main className="flex items-center justify-center mx-auto p-10 gap-3 w-full h-full">
         {cardList.map(
           (cardName, index) =>
-            cardName === "To do" && (
+            cardName === "Primary" && (
               <List
                 key={cardName + index}
                 index={index}
@@ -96,18 +96,20 @@ function App() {
         )}
         <section
           id="secondaryLists"
-          className="absolute top-0 left-0 flex flex-col bg-surface p-10 h-full w-1/5"
+          className="absolute top-0 left-0 flex flex-col bg-surface dark:bg-dmRaisedSurface p-10 h-full w-1/4 min-w-min"
         >
-          {cardList.map((cardName, index) => (
-            <List
-              key={cardName + index}
-              index={index}
-              cardList={cardList}
-              setCardList={setCardList}
-              listName={cardName}
-            />
-          ))}
-
+          {cardList.map(
+            (cardName, index) =>
+              cardName !== "Primary" && (
+                <List
+                  key={cardName + index}
+                  index={index}
+                  cardList={cardList}
+                  setCardList={setCardList}
+                  listName={cardName}
+                />
+              )
+          )}
           <div className="mb-4">
             {newCard ? (
               <button
