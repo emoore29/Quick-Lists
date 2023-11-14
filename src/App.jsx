@@ -82,15 +82,18 @@ function App() {
         </div>
       </header>
       <main className="flex items-center justify-center mx-auto p-10 gap-3 w-full h-full">
-        {cardList.map((cardName, index) => (
-          <List
-            key={cardName + index}
-            index={index}
-            cardList={cardList}
-            setCardList={setCardList}
-            listName={cardName}
-          />
-        ))}
+        {cardList.map(
+          (cardName, index) =>
+            cardName === "To do" && (
+              <List
+                key={cardName + index}
+                index={index}
+                cardList={cardList}
+                setCardList={setCardList}
+                listName={cardName}
+              />
+            )
+        )}
         <section
           id="secondaryLists"
           className="absolute top-0 left-0 flex flex-col bg-surface p-10 h-full w-1/5"
@@ -104,12 +107,41 @@ function App() {
               listName={cardName}
             />
           ))}
-          <button>Add Card</button>
-          <form>
-            <label htmlFor="">
-              <input type="text" />
-            </label>
-          </form>
+
+          <div className="mb-4">
+            {newCard ? (
+              <button
+                className="hover:text-primary dark:hover:text-dmPrimary"
+                onClick={() => setNewCard(false)}
+              >
+                Cancel
+              </button>
+            ) : (
+              <button
+                className="hover:text-primary dark:hover:text-dmPrimary"
+                onClick={() => setNewCard(true)}
+              >
+                Create new list
+              </button>
+            )}
+
+            {newCard && (
+              <form onSubmit={addCard} className="mb-4">
+                <input
+                  type="text"
+                  className="text-sm text-black"
+                  value={newCardName}
+                  onChange={(e) => setNewCardName(e.target.value)}
+                ></input>
+                <button
+                  className="hover:text-primary dark:hover:text-dmPrimary"
+                  type="submit"
+                >
+                  Add list
+                </button>
+              </form>
+            )}
+          </div>
         </section>
       </main>
     </div>
