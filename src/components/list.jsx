@@ -114,7 +114,7 @@ export default function List({ listName, cardList, setCardList, index }) {
           ? "min-w-full bg-surface dark:bg-dmRaisedSurface text-left"
           : "min-w-[350px] bg-background dark:bg-dmBackground text-center"
       }
-      min-h-[350px] w-1/4     
+      min-h-min w-1/4
       `}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
