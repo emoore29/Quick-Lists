@@ -91,6 +91,26 @@ function App() {
             listName={cardName}
           />
         ))}
+        <section
+          id="secondaryLists"
+          className="absolute top-0 left-0 flex flex-col bg-surface p-10 h-full w-1/5"
+        >
+          {cardList.map((cardName, index) => (
+            <List
+              key={cardName + index}
+              index={index}
+              cardList={cardList}
+              setCardList={setCardList}
+              listName={cardName}
+            />
+          ))}
+          <button>Add Card</button>
+          <form>
+            <label htmlFor="">
+              <input type="text" />
+            </label>
+          </form>
+        </section>
       </main>
     </div>
   );

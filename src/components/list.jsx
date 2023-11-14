@@ -110,7 +110,7 @@ export default function List({ listName, cardList, setCardList, index }) {
       id="list"
       className="relative p-5 text-center min-h-[350px] w-1/4
       text-lg 
-      bg-surface dark:bg-dmSurface
+      bg-background dark:bg-dmSurface
       "
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
