@@ -113,7 +113,7 @@ function App() {
           id="secondaryLists"
           className={`${
             isSecondaryListVisible ? "" : "hidden"
-          } fixed top-0 left-0 flex flex-col bg-surface dark:bg-dmRaisedSurface p-10 h-full w-1/4 min-w-min`}
+          } overflow-auto fixed top-0 left-0 flex flex-col bg-surface dark:bg-dmRaisedSurface p-10 h-full w-1/4 min-w-min`}
         >
           <button
             onClick={closeSecondaryLists}
