@@ -245,11 +245,13 @@ export default function List({ listName, cardList, setCardList, index }) {
           dark:text-dmOnSurface dark:bg-dmRaisedSurface"
           >
             <ul>
-              <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
-                <button className="w-full text-left" onClick={deleteCard}>
-                  <span className="opacity-[87%]">Delete card</span>
-                </button>
-              </li>
+              {listName !== "Primary" && (
+                <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
+                  <button className="w-full text-left" onClick={deleteCard}>
+                    <span className="opacity-[87%]">Delete card</span>
+                  </button>
+                </li>
+              )}
               <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                 <button className="w-full text-left" onClick={resetList}>
                   <span className="opacity-[87%]">Uncheck all items</span>

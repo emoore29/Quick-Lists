@@ -19,6 +19,7 @@ function App() {
   });
   const [newCardName, setNewCardName] = useState("");
   const [newCard, setNewCard] = useState(false);
+  const [isSecondaryListVisible, setSecondaryListVisible] = useState(true);
 
   // Updates time every second and sets state accordingly. dateTime is used in the Clock.
   useEffect(() => {
@@ -43,6 +44,14 @@ function App() {
     // reset values for adding a new card to default
     setNewCardName("");
     setNewCard(false);
+  }
+
+  function closeSecondaryLists() {
+    setSecondaryListVisible(false);
+  }
+
+  function openSecondaryLists() {
+    setSecondaryListVisible(true);
   }
 
   return (
@@ -94,10 +103,25 @@ function App() {
               />
             )
         )}
+        <button
+          onClick={openSecondaryLists}
+          className={`m-5 text-3xl rounded-full w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary border-sky-500 absolute top-0 left-0 `}
+        >
+          +
+        </button>
         <section
           id="secondaryLists"
-          className="absolute top-0 left-0 flex flex-col bg-surface dark:bg-dmRaisedSurface p-10 h-full w-1/4 min-w-min"
+          className={`${
+            isSecondaryListVisible ? "" : "hidden"
+          } fixed top-0 left-0 flex flex-col bg-surface dark:bg-dmRaisedSurface p-10 h-full w-1/4 min-w-min`}
         >
+          <button
+            onClick={closeSecondaryLists}
+            aria-label="Close secondary tasks"
+            className="absolute top-0 right-0 m-5"
+          >
+            <CancelX />
+          </button>
           {cardList.map(
             (cardName, index) =>
               cardName !== "Primary" && (
