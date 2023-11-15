@@ -30,7 +30,7 @@ function App() {
     };
   }, []);
 
-  // Saves cardList to local storage whenever it changes
+  // Saves card list to local storage whenever it changes
   useEffect(() => {
     localStorage.setItem("Card List", JSON.stringify(cardList));
   }, [cardList]);
