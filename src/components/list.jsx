@@ -59,9 +59,7 @@ export default function List({ listName, cardList, setCardList, index }) {
     newCardList.splice(index, 1); // Removes card from list based on index to avoid deleting cards with the same name
     setCardList(newCardList); // useEff in App.jsx will update the list in local storage after updating it here in state
     setIsMenuVisible(false);
-
-    // const updatedCardList = newCardList.filter((item) => item !== listName);
-    // localStorage.removeItem(listName);
+    localStorage.removeItem(listName);
   };
 
   // Reset all items in a list
