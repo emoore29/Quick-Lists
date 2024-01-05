@@ -10,12 +10,10 @@ export default function List({ listName, cardList, setCardList, index }) {
       return [];
     }
   });
-  const [update, setUpdate] = useState(false);
   // inputValue is a new item in the list
   const [listInput, setListInput] = useState("");
   const [updateItem, setUpdateItem] = useState(""); // string from an item in the list, set whenever user changes item
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [hover, setHover] = useState(false);
   const [itemHoverIndex, setItemHoverIndex] = useState(false);
 
   // Adds new item to list
@@ -112,41 +110,42 @@ export default function List({ listName, cardList, setCardList, index }) {
       ${
         listName !== "Primary"
           ? "min-w-full bg-surface dark:bg-dmRaisedSurface text-left"
-          : "min-w-[350px] bg-background dark:bg-dmBackground text-center"
+          : "min-w-[350px] bg-background dark:bg-dmBackground text-left"
       }
       min-h-min w-1/4
       `}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
     >
-      <h1 className="text-center mb-2">{listName !== "Primary" && listName}</h1>
+      <h1 className="text-left mb-2">{listName !== "Primary" && listName}</h1>
       <ul
         className={`mb-8 font-light ${
-          listName === "Primary" ? "text-2xl" : "text-md list-disc"
+          listName === "Primary" ? "text-2xl" : "text-md"
         }`}
       >
         {list.map((item, index) => (
           <li
             key={index + item.text}
-            className={`p-1 font-roboto relative text-primary dark:text-dmOnBackground ${
+            className={`font-roboto relative text-primary dark:text-dmOnBackground ${
               item.completed &&
-              "line-through text-onSurface dark:text-dmOnSurface opacity-[38%] "
+              "text-onSurface dark:text-dmOnSurface opacity-[38%] "
             }`}
             onMouseEnter={() => setItemHoverIndex(index)}
             onMouseLeave={() => setItemHoverIndex(null)}
           >
-            {/* ITEM EDIT */}
             {item.edit === true ? (
               <form onSubmit={(e) => handleUpdate(e, index)}>
                 <input
-                  className="rounded h-7 focus:outline-none
+                  className={`rounded h-7 focus:outline-none
                   border-none focus:ring-1
               focus:ring-primary dark:focus:ring-dmPrimary
               focus:ring-offset-background 
               dark:focus:ring-offset-dmBackground
-                bg-surface text-onSurface 
-                dark:bg-dmSurface dark:text-dmOnSurface
-                font-roboto font-light"
+                text-onSurface 
+               dark:text-dmOnSurface
+                font-roboto font-light ${
+                  listName !== "Primary"
+                    ? "text-left dark:bg-dmRaisedSurface bg-surface"
+                    : "text-left dark:bg-dmBackground bg-background"
+                }`}
                   type="text"
                   defaultValue={item.text}
                   onChange={(e) => setUpdateItem(e.target.value)}
@@ -163,31 +162,6 @@ export default function List({ listName, cardList, setCardList, index }) {
                 >
                   <CancelX />
                 </button>
-              </form>
-            ) : (
-              <span
-                className={
-                  item.prioritise && "text-secondary dark:text-dmPrimary"
-                }
-              >
-                {item.text}
-              </span>
-            )}
-            {itemHoverIndex === index && !item.edit ? (
-              <div className="absolute right-0 top-0">
-                <input
-                  type="checkbox"
-                  className="border-1 rounded-md
-              border-onSurface/[38%] dark:border-dmOnSurface/[38%]
-              bg-background text-primary
-              dark:bg-dmBackground dark:text-dmBackground
-              focus:ring-1 focus:ring-offset-1
-              focus:ring-primary dark:focus:ring-dmPrimary
-              focus:ring-offset-background 
-              dark:focus:ring-offset-dmBackground"
-                  checked={item.completed}
-                  onChange={() => handleComplete(index)}
-                />
                 <button
                   className="ml-2 hover:text-primary dark:hover:text-dmPrimary"
                   onClick={() => handleDelete(index)}
@@ -196,45 +170,58 @@ export default function List({ listName, cardList, setCardList, index }) {
                 </button>
                 <button
                   className="hover:text-primary dark:hover:text-dmPrimary"
-                  onClick={() => handleEdit(index)}
-                >
-                  <Edit />
-                </button>
-                <button
-                  className="hover:text-primary dark:hover:text-dmPrimary"
                   onClick={() => handlePrioritise(index)}
                 >
                   <Star />
                 </button>
-              </div>
+              </form>
             ) : (
-              ""
+              <>
+                <input
+                  type="checkbox"
+                  className="border-1 rounded-md
+            border-onSurface/[38%] dark:border-dmOnSurface/[38%]
+            bg-background text-primary
+            dark:bg-dmBackground dark:text-dmBackground
+            "
+                  checked={item.completed}
+                  onChange={() => handleComplete(index)}
+                />{" "}
+                <button
+                  className={
+                    item.prioritise && "text-secondary dark:text-dmPrimary"
+                  }
+                  onClick={() => handleEdit(index)}
+                >
+                  <span className={item.completed && "line-through"}>
+                    {item.text}
+                  </span>
+                </button>
+              </>
             )}
           </li>
         ))}
-        {hover && (
-          <li>
-            <form onSubmit={handleSubmit}>
-              <input
-                className={`rounded border-none
+        <li>
+          <form onSubmit={handleSubmit}>
+            <input
+              className={`rounded border-none
                 p-0 w-auto
-                  focus:outline-none focus:ring-0
+                 h-7 
                   text-onSurface 
                    dark:text-dmOnSurface
                   font-roboto font-light
                   ${
                     listName !== "Primary"
                       ? "text-left dark:bg-dmRaisedSurface bg-surface"
-                      : "text-center dark:bg-dmBackground bg-background"
+                      : "text-left dark:bg-dmBackground bg-background"
                   }`}
-                type="text"
-                value={listInput}
-                placeholder="Add item"
-                onChange={(e) => setListInput(e.target.value)}
-              />
-            </form>
-          </li>
-        )}
+              type="text"
+              value={listInput}
+              placeholder="Click to add item"
+              onChange={(e) => setListInput(e.target.value)}
+            />
+          </form>
+        </li>
       </ul>
       <div id="menu" className="absolute bottom-5 right-5 text-sm">
         {isMenuVisible && (

@@ -1,13 +1,12 @@
-import { useState, useEffect } from "react";
-import { SquaresPlus, Plus, CancelX } from "./components/svgs";
+import { useEffect, useState } from "react";
 import "./App.css";
-import "./index.css";
-import ThemeSwitch from "./components/themeSwitch";
 import List from "./components/list";
-import { day, dateString } from "./utils/dates";
+import { CancelX } from "./components/svgs";
+import ThemeSwitch from "./components/themeSwitch";
+import "./index.css";
+import { dateString, day } from "./utils/dates";
 
 function App() {
-  // value = current date and time
   const [dateTime, setDateTime] = useState(new Date());
   const [cardList, setCardList] = useState(() => {
     const savedList = localStorage.getItem("Card List");
@@ -19,9 +18,9 @@ function App() {
   });
   const [newCardName, setNewCardName] = useState("");
   const [newCard, setNewCard] = useState(false);
-  const [isSecondaryListVisible, setSecondaryListVisible] = useState(true);
+  const [isSecondaryListVisible, setSecondaryListVisible] = useState(false);
 
-  // Updates time every second and sets state accordingly. dateTime is used in the Clock.
+  // CLOCK TIMER
   useEffect(() => {
     const interval = setInterval(() => setDateTime(new Date()), 1000);
 
@@ -56,7 +55,7 @@ function App() {
 
   return (
     <div
-      data-theme="cute"
+      data-theme="pink"
       className="h-full font-poppins min-h-screen
       bg-background dark:bg-dmBackground 
       text-onBackground dark:text-dmOnBackground/[87%]

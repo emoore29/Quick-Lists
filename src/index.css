@@ -9,7 +9,7 @@
 @tailwind utilities;
 
 @layer base {
-  div[data-theme="cute"] {
+  div[data-theme="pink"] {
     /* LIGHT MODE */
     --color-primary: #4e1b2b;
     --color-secondary: #8a1333;

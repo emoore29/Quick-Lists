@@ -9,22 +9,29 @@ export default function ThemeSwitch({ color, dmColor }) {
   );
 
   const toggleDarkMode = (checked) => {
-    setTheme(colorTheme);
+    setTheme(checked ? "dark" : "light");
     setDarkMode(checked);
+  };
+
+  const handleButtonClick = () => {
+    toggleDarkMode(!darkMode);
   };
 
   return (
     <>
-      <div>
+      <button
+        aria-label="Toggles dark mode"
+        onClick={handleButtonClick}
+        role="switch"
+      >
         <DarkModeSwitch
-          style={{}}
-          checked={darkMode}
           onChange={toggleDarkMode}
+          checked={darkMode}
           moonColor={dmColor}
           sunColor={color}
           size={30}
         />
-      </div>
+      </button>
     </>
   );
 }
