@@ -53,7 +53,7 @@ export default function List({ listName, cardList, setCardList, index }) {
     setList(newList);
   };
 
-  // delete a card + the corresponding list
+  // delete a card from view and local storage
   const deleteCard = () => {
     const newCardList = [...cardList];
     newCardList.splice(index, 1); // Removes card from list based on index to avoid deleting cards with the same name
@@ -232,7 +232,10 @@ export default function List({ listName, cardList, setCardList, index }) {
             <ul>
               {listName !== "Primary" && (
                 <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
-                  <button className="w-full text-left" onClick={deleteCard}>
+                  <button
+                    className="w-full text-left"
+                    onClick={() => deleteCard(listName)}
+                  >
                     <span className="opacity-[87%]">Delete card</span>
                   </button>
                 </li>
