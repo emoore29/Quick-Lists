@@ -5,6 +5,7 @@ import { CancelX } from "./components/svgs";
 import ThemeSwitch from "./components/themeSwitch";
 import "./index.css";
 import { dateString, day } from "./utils/dates";
+import Schedule from "./components/schedule";
 
 function App() {
   const [dateTime, setDateTime] = useState(new Date());
@@ -102,6 +103,7 @@ function App() {
               />
             )
         )}
+        <Schedule />
         <button
           onClick={openSecondaryLists}
           className={`m-5 text-3xl rounded-full w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary border-sky-500 absolute top-0 left-0 `}
