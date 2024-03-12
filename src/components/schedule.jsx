@@ -3,7 +3,7 @@ import weeklyAvailability from "../../json/weekly_availability.json";
 export default function Schedule() {
   return (
     <>
-      <table className="absolute top-0 right-0 border border-solid">
+      <table className="absolute top-0 right-0 ">
         <thead>
           <tr>
             <th>Day</th>
