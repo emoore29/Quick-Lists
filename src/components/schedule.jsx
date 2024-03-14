@@ -33,7 +33,7 @@ export default function Schedule() {
     const nextWeek = formatDate(nextWeekMonday);
 
     // Import this week's availability and next week's (if available).
-    const thisWeeksAvailabilityPath = `../../src/json/weekly_availability_${thisWeek}.json`;
+    const thisWeeksAvailabilityPath = `../../Quick-Lists/src/json/weekly_availability_${thisWeek}.json`;
     const nextWeeksAvailabilityPath = `../../src/json/weekly_availability_${nextWeek}.json`;
 
     fetch(thisWeeksAvailabilityPath)
