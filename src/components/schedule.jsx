@@ -33,18 +33,32 @@ export default function Schedule() {
     const nextWeek = formatDate(nextWeekMonday);
 
     // Import this week's availability and next week's (if available).
-    const thisWeeksAvailabilityPath = `../../Quick-Lists/src/json/weekly_availability_${thisWeek}.json`;
-    const nextWeeksAvailabilityPath = `../../src/json/weekly_availability_${nextWeek}.json`;
+    const thisWeeksAvailabilityPath = `/weekly_availability_${thisWeek}.json`;
+    const nextWeeksAvailabilityPath = `weekly_availability_${nextWeek}.json`;
 
-    fetch(thisWeeksAvailabilityPath)
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async (path) => {
+      try {
+        const response = await fetch(path);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        return data;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        return null;
+      }
+    };
+
+    const fetchThisWeeksData = async () => {
+      const data = await fetchData(thisWeeksAvailabilityPath);
+      if (data) {
         setThisWeeksAvailability(data);
-        console.log("this week's data", data);
-      })
-      .catch((error) => {
-        console.error(`Error loading this week's availability:`, error);
-      });
+        console.log("This week's data:", data);
+      }
+    };
+
+    fetchThisWeeksData();
 
     import(nextWeeksAvailabilityPath)
       .then((nextWeeksData) => {
