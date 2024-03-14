@@ -55,7 +55,7 @@ export default function Schedule() {
   }, []); // Empty dependency array to run the effect only once
 
   return (
-    <div className="absolute top-0 right-0 ">
+    <div className="absolute top-0 right-0 max-w-[400px]">
       <table>
         <caption>This week's work schedule</caption>
         <thead>
@@ -113,63 +113,72 @@ export default function Schedule() {
             })}
         </tbody>
       </table>
-      <table>
-        <caption>Next week's work schedule</caption>
-        <thead>
-          <tr>
-            <th>Day</th>
-            <th>Date</th>
-            <th>VIQ</th>
-            <th>MDPI</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Render this week's availability */}
-          {nextWeeksAvailability &&
-            nextWeeksAvailability.map((day) => {
-              // Parse the date string into a Date object
-              const date = new Date(day.date);
 
-              // Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-              const dayOfWeek = date.getDay();
+      {nextWeeksAvailability ? (
+        <table>
+          <caption>Next week's work schedule</caption>
 
-              // Define an array to map day indices to day names
-              const daysOfWeek = [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-              ];
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Date</th>
+              <th>VIQ</th>
+              <th>MDPI</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Render this week's availability */}
+            {nextWeeksAvailability &&
+              nextWeeksAvailability.map((day) => {
+                // Parse the date string into a Date object
+                const date = new Date(day.date);
 
-              // Get the name of the day using the day index
-              const dayName = daysOfWeek[dayOfWeek];
+                // Get the day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+                const dayOfWeek = date.getDay();
 
-              return (
-                <tr key={day.date}>
-                  <td>{dayName}</td>
-                  <td>{day.date}</td>
-                  <td>
-                    {day.viq && typeof day.viq === "object"
-                      ? Object.entries(day.viq).map(([key, value]) =>
-                          value ? (
-                            <div key={key}>
-                              {key.replace("_", "-")}: {value}
-                            </div>
-                          ) : (
-                            ""
+                // Define an array to map day indices to day names
+                const daysOfWeek = [
+                  "Sunday",
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                ];
+
+                // Get the name of the day using the day index
+                const dayName = daysOfWeek[dayOfWeek];
+
+                return (
+                  <tr key={day.date}>
+                    <td>{dayName}</td>
+                    <td>{day.date}</td>
+                    <td>
+                      {day.viq && typeof day.viq === "object"
+                        ? Object.entries(day.viq).map(([key, value]) =>
+                            value ? (
+                              <div key={key}>
+                                {key.replace("_", "-")}: {value}
+                              </div>
+                            ) : (
+                              ""
+                            )
                           )
-                        )
-                      : ""}
-                  </td>
-                  <td>{day.mdpi}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
+                        : ""}
+                    </td>
+                    <td>{day.mdpi}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      ) : (
+        <p>
+          To see next week's availability, please update the schedule via QL
+          repo or Py availability program.
+        </p>
+      )}
     </div>
   );
 }
