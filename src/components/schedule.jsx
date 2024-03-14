@@ -2,8 +2,9 @@ import weeklyAvailability from "../../json/weekly_availability.json";
 
 export default function Schedule() {
   return (
-    <>
-      <table className="absolute top-0 right-0 border border-solid">
+    <div className="absolute top-0 right-0">
+      <table>
+        <caption>Upcoming availability</caption>
         <thead>
           <tr>
             <th>Day</th>
@@ -33,6 +34,6 @@ export default function Schedule() {
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }
