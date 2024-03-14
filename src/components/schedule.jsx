@@ -36,10 +36,11 @@ export default function Schedule() {
     const thisWeeksAvailabilityPath = `../../src/json/weekly_availability_${thisWeek}.json`;
     const nextWeeksAvailabilityPath = `../../src/json/weekly_availability_${nextWeek}.json`;
 
-    import(thisWeeksAvailabilityPath)
-      .then((thisWeeksData) => {
-        setThisWeeksAvailability(thisWeeksData.default);
-        console.log("this week's data", thisWeeksData.default);
+    fetch(thisWeeksAvailabilityPath)
+      .then((response) => response.json())
+      .then((data) => {
+        setThisWeeksAvailability(data);
+        console.log("this week's data", data);
       })
       .catch((error) => {
         console.error(`Error loading this week's availability:`, error);
@@ -52,7 +53,7 @@ export default function Schedule() {
       .catch((error) => {
         console.error(`Error loading next week's availability:`, error);
       });
-  }, []); // Empty dependency array to run the effect only once
+  }, []);
 
   return (
     <div className="absolute top-0 right-0 max-w-[400px]">
