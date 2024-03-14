@@ -122,7 +122,7 @@ export default function List({ listName, cardList, setCardList, index }) {
         {list.map((item, index) => (
           <li
             key={index + item.text}
-            className={`font-roboto relative text-primary dark:text-dmOnBackground ${
+            className={`font-roboto relative text-primary dark:text-dmOnBackground text-left ${
               item.completed &&
               "text-onSurface dark:text-dmOnSurface opacity-[38%] "
             }`}
@@ -186,9 +186,9 @@ export default function List({ listName, cardList, setCardList, index }) {
                   onChange={() => handleComplete(index)}
                 />{" "}
                 <button
-                  className={
+                  className={`text-left ${
                     item.prioritise && "text-secondary dark:text-dmPrimary"
-                  }
+                  }`}
                   onClick={() => handleEdit(index)}
                 >
                   <span className={item.completed && "line-through"}>
