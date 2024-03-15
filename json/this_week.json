@@ -27,7 +27,7 @@
       "live_am": "",
       "live_pm": "",
       "overnight": "",
-      "two_day": "0.5",
+      "two_day": "",
       "five_day": ""
     },
     "mdpi": "<=20k"

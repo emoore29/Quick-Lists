@@ -1,13 +1,9 @@
-
 import nextWeek from "../../json/next_week.json";
 import thisWeek from "../../json/this_week.json";
 
-
 export default function Schedule() {
- 
-
   return (
-    <div className="absolute top-0 right-0">
+    <div className="absolute bottom-0 right-0 text-xs">
       <table>
         <caption>This week</caption>
         <thead>
@@ -69,7 +65,7 @@ export default function Schedule() {
             </tr>
           ))}
         </tbody>
-      </table>          
+      </table>
     </div>
   );
 }

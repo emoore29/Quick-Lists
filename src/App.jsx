@@ -1,34 +1,23 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Header from "./components/Header";
 import List from "./components/list";
-import { CancelX } from "./components/svgs";
-import ThemeSwitch from "./components/themeSwitch";
-import "./index.css";
-import { dateString, day } from "./utils/dates";
 import Schedule from "./components/schedule";
+import { CancelX } from "./components/svgs";
+import "./index.css";
 
 function App() {
-  const [dateTime, setDateTime] = useState(new Date());
   const [cardList, setCardList] = useState(() => {
     const savedList = localStorage.getItem("Card List");
     if (savedList) {
       return JSON.parse(savedList);
     } else {
-      return ["Primary"];
+      return ["Today"];
     }
   });
   const [newCardName, setNewCardName] = useState("");
   const [newCard, setNewCard] = useState(false);
   const [isSecondaryListVisible, setSecondaryListVisible] = useState(false);
-
-  // CLOCK TIMER
-  useEffect(() => {
-    const interval = setInterval(() => setDateTime(new Date()), 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   // Saves cardList to local storage whenever it changes
   useEffect(() => {
@@ -62,38 +51,11 @@ function App() {
       text-onBackground dark:text-dmOnBackground/[87%]
       "
     >
-      <header
-        id="header"
-        className="px-10 py-10 w-full m-auto
-          flex justify-center items-center gap-5
-          "
-      >
-        <div className="flex flex-col items-center gap-2">
-          <h1 className="text-lg font-normal">
-            <span className="text-primary dark:text-dmPrimary">
-              {day + " "}
-            </span>
-            <span>{dateString + " "}</span>
-            <span className="opacity-60 text-lg">
-              {dateTime.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </span>
-          </h1>
-        </div>
-
-        <div className="flex items-center">
-          <ThemeSwitch
-            color="var(--color-primary)"
-            dmColor="var(--color-darkmode-primary)"
-          />
-        </div>
-      </header>
+      <Header />
       <main className="flex items-center justify-center mx-auto p-10 gap-3 w-full h-full">
         {cardList.map(
           (cardName, index) =>
-            cardName === "Primary" && (
+            cardName === "Today" && (
               <List
                 key={cardName + index}
                 index={index}
@@ -125,7 +87,7 @@ function App() {
           </button>
           {cardList.map(
             (cardName, index) =>
-              cardName !== "Primary" && (
+              cardName !== "Today" && (
                 <List
                   key={cardName + index}
                   index={index}
@@ -151,7 +113,6 @@ function App() {
                 Create new list
               </button>
             )}
-
             {newCard && (
               <form onSubmit={addCard} className="mb-4">
                 <input

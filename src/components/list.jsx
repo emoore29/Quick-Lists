@@ -102,21 +102,21 @@ export default function List({ listName, cardList, setCardList, index }) {
   };
 
   return (
-    <section
+    <div
       id="list"
-      className={`relative p-5
+      className={`relative p-5 border border-solid
       ${
-        listName !== "Primary"
+        listName !== "Today"
           ? "min-w-full bg-surface dark:bg-dmRaisedSurface text-left"
           : "min-w-[350px] bg-background dark:bg-dmBackground text-left"
       }
       min-h-min w-1/4
       `}
     >
-      <h1 className="text-left mb-2">{listName !== "Primary" && listName}</h1>
+      <h1 className="text-left mb-2">{listName}</h1>
       <ul
         className={`mb-8 font-light ${
-          listName === "Primary" ? "text-2xl" : "text-md"
+          listName === "Today" ? "text-2xl" : "text-md"
         }`}
       >
         {list.map((item, index) => (
@@ -140,7 +140,7 @@ export default function List({ listName, cardList, setCardList, index }) {
                 text-onSurface 
                dark:text-dmOnSurface
                 font-roboto font-light ${
-                  listName !== "Primary"
+                  listName !== "Today"
                     ? "text-left dark:bg-dmRaisedSurface bg-surface"
                     : "text-left dark:bg-dmBackground bg-background"
                 }`}
@@ -209,7 +209,7 @@ export default function List({ listName, cardList, setCardList, index }) {
                    dark:text-dmOnSurface
                   font-roboto font-light
                   ${
-                    listName !== "Primary"
+                    listName !== "Today"
                       ? "text-left dark:bg-dmRaisedSurface bg-surface"
                       : "text-left dark:bg-dmBackground bg-background"
                   }`}
@@ -230,7 +230,7 @@ export default function List({ listName, cardList, setCardList, index }) {
           dark:text-dmOnSurface dark:bg-dmRaisedSurface"
           >
             <ul>
-              {listName !== "Primary" && (
+              {listName !== "Today" && (
                 <li className="p-1 w-full hover:text-primary dark:hover:text-dmPrimary">
                   <button
                     className="w-full text-left"
@@ -274,6 +274,6 @@ export default function List({ listName, cardList, setCardList, index }) {
           <KebabMenu />
         </button>
       </div>
-    </section>
+    </div>
   );
 }
