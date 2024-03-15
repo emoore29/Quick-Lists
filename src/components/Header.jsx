@@ -14,7 +14,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header
+    <div
       id="header"
       className="px-10 py-10 w-full m-auto
           flex justify-center items-center gap-5
@@ -39,6 +39,6 @@ export default function Header() {
           dmColor="var(--color-darkmode-primary)"
         />
       </div>
-    </header>
+    </div>
   );
 }

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import { KebabMenu, Star, Edit, Delete, CancelX, DoneSvg } from "./svgs";
-export default function List({ listName, cardList, setCardList, index }) {
+export default function List({
+  listName,
+  secondaryLists,
+  setSecondaryLists,
+  index,
+}) {
   // If there are items saved in local storage, sets list to the saved list, otherwise list is empty by default
   const [list, setList] = useState(() => {
     const savedList = localStorage.getItem(listName);
@@ -55,9 +60,9 @@ export default function List({ listName, cardList, setCardList, index }) {
 
   // delete a card from view and local storage
   const deleteCard = () => {
-    const newCardList = [...cardList];
+    const newCardList = [...secondaryLists];
     newCardList.splice(index, 1); // Removes card from list based on index to avoid deleting cards with the same name
-    setCardList(newCardList); // useEff in App.jsx will update the list in local storage after updating it here in state
+    setSecondaryLists(newCardList); // useEff in App.jsx will update the list in local storage after updating it here in state
     setIsMenuVisible(false);
     localStorage.removeItem(listName);
   };
@@ -104,16 +109,16 @@ export default function List({ listName, cardList, setCardList, index }) {
   return (
     <div
       id="list"
-      className={`relative p-5 border border-solid
+      className={`rounded-md relative p-5
       ${
         listName !== "Today"
-          ? "min-w-full bg-surface dark:bg-dmRaisedSurface text-left"
-          : "min-w-[350px] bg-background dark:bg-dmBackground text-left"
+          ? "min-w-[45%] bg-onSurface dark:bg-dmRaisedSurface text-left"
+          : "min-w-[350px] bg-background dark:bg-dmSurface text-left"
       }
       min-h-min w-1/4
       `}
     >
-      <h1 className="text-left mb-2">{listName}</h1>
+      <h2 className="text-left mb-2">{listName}</h2>
       <ul
         className={`mb-8 font-light ${
           listName === "Today" ? "text-2xl" : "text-md"
@@ -123,8 +128,9 @@ export default function List({ listName, cardList, setCardList, index }) {
           <li
             key={index + item.text}
             className={`font-roboto relative text-primary dark:text-dmOnBackground text-left ${
-              item.completed &&
-              "text-onSurface dark:text-dmOnSurface opacity-[38%] "
+              item.completed
+                ? "text-onSurface dark:text-dmOnSurface opacity-[38%]"
+                : ""
             }`}
             onMouseEnter={() => setItemHoverIndex(index)}
             onMouseLeave={() => setItemHoverIndex(null)}
@@ -187,11 +193,11 @@ export default function List({ listName, cardList, setCardList, index }) {
                 />{" "}
                 <button
                   className={`text-left ${
-                    item.prioritise && "text-secondary dark:text-dmPrimary"
+                    item.prioritise ? "text-secondary dark:text-dmPrimary" : ""
                   }`}
                   onClick={() => handleEdit(index)}
                 >
-                  <span className={item.completed && "line-through"}>
+                  <span className={item.completed ? "line-through" : ""}>
                     {item.text}
                   </span>
                 </button>

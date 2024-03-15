@@ -19,7 +19,7 @@ module.exports = {
         dmPrimary: "var(--color-darkmode-primary)",
         dmSecondary: "var(--color-darkmode-secondary)",
         dmBackground: "var(--color-darkmode-background)",
-        dmSurface: "var(--color-darkmode-background)",
+        dmSurface: "var(--color-darkmode-surface)",
         dmRaisedSurface: "var(--color-darkmode-raised-surface)",
         dmOnBackground:
           "rgb(var(--color-darkmode-on-background), <alpha-value>)",

@@ -3,7 +3,7 @@ import thisWeek from "../../json/this_week.json";
 
 export default function Schedule() {
   return (
-    <div className="absolute bottom-0 right-0 text-xs">
+    <div className="absolute bottom-0 left-0 text-xs">
       <table>
         <caption>This week</caption>
         <thead>
