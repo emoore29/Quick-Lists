@@ -52,7 +52,7 @@ export default function SecondaryLists({
       >
         <CancelX />
       </button>
-      <div className="flex gap-5 flex-wrap">
+      <div className="columns-2 gap-5">
         {secondaryLists &&
           secondaryLists.map(
             (cardName, index) =>

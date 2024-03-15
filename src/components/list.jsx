@@ -108,20 +108,19 @@ export default function List({
 
   return (
     <div
-      id="list"
-      className={`rounded-md relative p-5
+      className={`rounded-md relative pl-10 py-5 pr-5 break-inside-avoid
       ${
         listName !== "Today"
-          ? "min-w-[45%] bg-onSurface dark:bg-dmRaisedSurface text-left"
-          : "min-w-[350px] bg-background dark:bg-dmSurface text-left"
+          ? "block min-w-full mb-5 bg-onSurface dark:bg-dmRaisedSurface text-left"
+          : "min-w-[450px] bg-background dark:bg-dmSurface text-left"
       }
-      min-h-min w-1/4
+      min-h-min w-1/4 
       `}
     >
       <h2 className="text-left mb-2">{listName}</h2>
       <ul
         className={`mb-8 font-light ${
-          listName === "Today" ? "text-2xl" : "text-md"
+          listName === "Today" ? "text-xl" : "text-md"
         }`}
       >
         {list.map((item, index) => (
@@ -183,16 +182,19 @@ export default function List({
               <>
                 <input
                   type="checkbox"
-                  className="border-1 rounded-md
+                  className={`absolute -left-5  ${
+                    listName == "Today" ? "top-1.5" : "top-1"
+                  }
+                  border-1 rounded-md
             border-onSurface/[38%] dark:border-dmOnSurface/[38%]
             bg-background text-primary
             dark:bg-dmBackground dark:text-dmBackground
-            "
+            `}
                   checked={item.completed}
                   onChange={() => handleComplete(index)}
                 />{" "}
                 <button
-                  className={`text-left ${
+                  className={`text-left  ${
                     item.prioritise ? "text-secondary dark:text-dmPrimary" : ""
                   }`}
                   onClick={() => handleEdit(index)}
@@ -214,14 +216,10 @@ export default function List({
                   text-onSurface 
                    dark:text-dmOnSurface
                   font-roboto font-light
-                  ${
-                    listName !== "Today"
-                      ? "text-left dark:bg-dmRaisedSurface bg-surface"
-                      : "text-left dark:bg-dmBackground bg-background"
-                  }`}
+                  text-left bg-transparent`}
               type="text"
               value={listInput}
-              placeholder="Click to add item"
+              placeholder="+"
               onChange={(e) => setListInput(e.target.value)}
             />
           </form>
