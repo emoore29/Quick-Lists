@@ -15,8 +15,6 @@ export default function Schedule() {
     setTodaysDate(formattedDate);
   }, []);
 
-  console.log(todaysDate);
-
   return (
     <div className="absolute bottom-0 left-0 text-xs">
       <table>

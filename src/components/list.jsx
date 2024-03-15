@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { KebabMenu, Star, Edit, Delete, CancelX, DoneSvg } from "./svgs";
+import thisWeek from "../../json/this_week.json";
+import { day } from "../utils/dates";
+
 export default function List({
   listName,
   secondaryLists,
@@ -19,7 +22,66 @@ export default function List({
   const [listInput, setListInput] = useState("");
   const [updateItem, setUpdateItem] = useState(""); // string from an item in the list, set whenever user changes item
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [itemHoverIndex, setItemHoverIndex] = useState(false);
+
+  // Add today's work from this week's schedule to list items
+  useEffect(() => {
+    let stored = false;
+    list.map((item) => {
+      if (item.text.startsWith("MDPI") || item.text.startsWith("VIQ")) {
+        stored = true;
+      }
+    });
+
+    if (!stored && listName == "Today") {
+      const mdpi = thisWeek[day]["mdpi"];
+
+      const viqArr = [];
+      // loop through day, add key (e.g. "five_day") and the associated value if there is one
+      for (const [key, value] of Object.entries(thisWeek[day]["viq"])) {
+        if (value) {
+          let formattedKey;
+          switch (key) {
+            case "five_day":
+              formattedKey = "five-day";
+              break;
+            case "two_day":
+              formattedKey = "two-day";
+              break;
+            case "live_am":
+              formattedKey = "live AM";
+              break;
+            case "live_pm":
+              formattedKey = "live PM";
+              break;
+            default:
+              formattedKey = key; // for other cases, keep the key as is
+          }
+          viqArr.push(`${value}h ${formattedKey} turnaround`);
+        }
+      }
+
+      const workItems = [
+        {
+          text: `MDPI: ${mdpi}`,
+          completed: false,
+          edit: false,
+          prioritise: false,
+        },
+        ...viqArr.map((workItem) => ({
+          text: `VIQ: ${workItem}`,
+          completed: false,
+          edit: false,
+          prioritise: false,
+        })),
+      ];
+
+      setList([...list, ...workItems]);
+    }
+  }, [day, listName]);
+
+  useEffect(() => {
+    console.log("test");
+  }, [day, listName]);
 
   // Adds new item to list
   const handleSubmit = (e) => {
@@ -131,8 +193,6 @@ export default function List({
                 ? "text-onSurface dark:text-dmOnSurface opacity-[38%]"
                 : ""
             }`}
-            onMouseEnter={() => setItemHoverIndex(index)}
-            onMouseLeave={() => setItemHoverIndex(null)}
           >
             {item.edit === true ? (
               <form onSubmit={(e) => handleUpdate(e, index)}>
