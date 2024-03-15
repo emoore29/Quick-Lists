@@ -5,7 +5,7 @@ export default function Schedule() {
   return (
     <div className="absolute bottom-0 left-0 text-xs">
       <table>
-        <caption>This week</caption>
+        <caption>This week's schedule</caption>
         <thead>
           <tr>
             <th>Day</th>
