@@ -8,7 +8,7 @@ import SecondaryLists from "./components/SecondaryLists";
 
 function App() {
   const [areSecondaryListsVisible, setAreSecondaryListsVisible] =
-    useState(false);
+    useState(true);
 
   function openSecondaryLists() {
     setAreSecondaryListsVisible(true);
