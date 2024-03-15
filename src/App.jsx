@@ -31,7 +31,6 @@ function App() {
           <Header />
           <List listName={"Today"} />
         </div>
-
         <button
           onClick={openSecondaryLists}
           className={`m-5 text-3xl rounded-full w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary absolute top-0 right-0 `}
