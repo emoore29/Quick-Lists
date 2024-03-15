@@ -123,8 +123,9 @@ export default function List({ listName, cardList, setCardList, index }) {
           <li
             key={index + item.text}
             className={`font-roboto relative text-primary dark:text-dmOnBackground text-left ${
-              item.completed &&
-              "text-onSurface dark:text-dmOnSurface opacity-[38%] "
+              item.completed
+                ? "text-onSurface dark:text-dmOnSurface opacity-[38%]"
+                : ""
             }`}
             onMouseEnter={() => setItemHoverIndex(index)}
             onMouseLeave={() => setItemHoverIndex(null)}
@@ -187,11 +188,11 @@ export default function List({ listName, cardList, setCardList, index }) {
                 />{" "}
                 <button
                   className={`text-left ${
-                    item.prioritise && "text-secondary dark:text-dmPrimary"
+                    item.prioritise ? "text-secondary dark:text-dmPrimary" : ""
                   }`}
                   onClick={() => handleEdit(index)}
                 >
-                  <span className={item.completed && "line-through"}>
+                  <span className={item.completed ? "line-through" : ""}>
                     {item.text}
                   </span>
                 </button>
