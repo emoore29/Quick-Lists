@@ -18,12 +18,12 @@
     --color-on-background: 138, 19, 51;
     --color-on-primary: #e9d6da;
     --color-on-secondary: #47202c;
-    --color-on-surface: 0, 0, 0;
+    --color-on-surface: #a78a8f;
     /* DARK MODE */
     --color-darkmode-primary: #ff99b5;
     --color-darkmode-secondary: #ff99b5;
-    --color-darkmode-background: #47202c;
-    --color-darkmode-surface: 34, 31, 28;
+    --color-darkmode-background: #351720;
+    --color-darkmode-surface: #46232e;
     --color-darkmode-raised-surface: #572937;
     --color-darkmode-on-background: 238, 217, 210;
     --color-darkmode-on-primary: #000000;

@@ -22,13 +22,19 @@ function App() {
       text-onBackground dark:text-dmOnBackground/[87%]
       "
     >
-      <Header />
-      <main className="flex items-center justify-center mx-auto p-10 gap-3 w-full h-full">
+      <div className="flex w-full h-full  min-h-screen">
         <Schedule />
-        <List listName={"Today"} />
+        <div
+          id="primary-container"
+          className="flex flex-col w-full h-full items-center"
+        >
+          <Header />
+          <List listName={"Today"} />
+        </div>
+
         <button
           onClick={openSecondaryLists}
-          className={`m-5 text-3xl rounded-full w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary border-sky-500 absolute top-0 left-0 `}
+          className={`m-5 text-3xl rounded-full w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary absolute top-0 right-0 `}
         >
           +
         </button>
@@ -36,7 +42,7 @@ function App() {
           areSecondaryListsVisible={areSecondaryListsVisible}
           setAreSecondaryListsVisible={setAreSecondaryListsVisible}
         />
-      </main>
+      </div>
     </div>
   );
 }

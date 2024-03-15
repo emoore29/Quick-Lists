@@ -42,9 +42,9 @@ export default function SecondaryLists({
       id="secondaryLists"
       className={`${
         areSecondaryListsVisible ? "" : "hidden"
-      } overflow-auto fixed top-0 left-0 flex flex-col bg-surface dark:bg-dmRaisedSurface p-10 h-full w-1/4 min-w-min`}
+      } overflow-auto relative flex flex-col bg-surface dark:bg-dmSurface p-10 h-full w-1/2 min-w-min min-h-screen `}
     >
-      <h2>Secondary Lists</h2>{" "}
+      <h2 className="mb-5 text-center">Secondary Lists</h2>{" "}
       <button
         onClick={closeSecondaryLists}
         aria-label="Close secondary tasks"
@@ -52,19 +52,21 @@ export default function SecondaryLists({
       >
         <CancelX />
       </button>
-      {secondaryLists &&
-        secondaryLists.map(
-          (cardName, index) =>
-            cardName !== "Today" && (
-              <List
-                key={cardName + index}
-                index={index}
-                secondaryLists={secondaryLists}
-                setSecondaryLists={setSecondaryLists}
-                listName={cardName}
-              />
-            )
-        )}
+      <div className="flex gap-5 flex-wrap">
+        {secondaryLists &&
+          secondaryLists.map(
+            (cardName, index) =>
+              cardName !== "Today" && (
+                <List
+                  key={cardName + index}
+                  index={index}
+                  secondaryLists={secondaryLists}
+                  setSecondaryLists={setSecondaryLists}
+                  listName={cardName}
+                />
+              )
+          )}
+      </div>
       <div className="mb-4">
         {newCard ? (
           <button
