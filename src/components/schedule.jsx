@@ -1,7 +1,22 @@
+import { useState } from "react";
 import nextWeek from "../../json/next_week.json";
 import thisWeek from "../../json/this_week.json";
+import { useEffect } from "react";
 
 export default function Schedule() {
+  const [todaysDate, setTodaysDate] = useState("");
+
+  useEffect(() => {
+    const today = new Date();
+
+    // Convert todaysDate to a string in the format "YYYY-MM-DD"
+    const formattedDate = today.toISOString().split("T")[0];
+
+    setTodaysDate(formattedDate);
+  }, []);
+
+  console.log(todaysDate);
+
   return (
     <div className="absolute bottom-0 left-0 text-xs">
       <table>
@@ -16,7 +31,14 @@ export default function Schedule() {
         </thead>
         <tbody>
           {Object.entries(thisWeek).map(([day, details]) => (
-            <tr key={day}>
+            <tr
+              key={day}
+              className={`${
+                todaysDate == details.date
+                  ? "dark:text-dmPrimary text-primary"
+                  : ""
+              }`}
+            >
               <td>{day}</td>
               <td>{details.date}</td>
               <td>
