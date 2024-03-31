@@ -49,7 +49,9 @@ Error generating stack: `+i.message+`
               dark:focus:ring-offset-dmBackground
                 text-onSurface 
                dark:text-dmOnSurface
-                font-roboto font-light ${e!=="Today"?"text-left dark:bg-dmRaisedSurface bg-surface":"text-left dark:bg-dmBackground bg-background"}`,type:"text",defaultValue:g.text,onChange:P=>a(P.target.value)}),x("button",{className:"hover:text-primary dark:hover:text-dmPrimary",type:"submit",children:x(p1,{})}),x("button",{className:"hover:text-primary dark:hover:text-dmPrimary",onClick:()=>f(S),children:x(ep,{})}),x("button",{className:"ml-2 hover:text-primary dark:hover:text-dmPrimary",onClick:()=>k(S),children:x(m1,{})}),x("button",{className:"hover:text-primary dark:hover:text-dmPrimary",onClick:()=>w(S),children:x(h1,{})})]}):X(kc,{children:[x("input",{type:"checkbox",className:`absolute -left-5  ${e=="Today"?"top-1.5":"top-1"}
+            w-3/4
+               
+                font-roboto font-light ${e!=="Today"?"text-left dark:bg-dmRaisedSurface bg-surface":"text-left dark:bg-dmBackground bg-background"}`,type:"text",defaultValue:g.text,onChange:P=>a(P.target.value)}),x("button",{className:"hover:text-primary dark:hover:text-dmPrimary",type:"submit",children:x(p1,{})}),x("button",{className:"hover:text-primary dark:hover:text-dmPrimary",onClick:()=>f(S),children:x(ep,{})}),x("button",{className:" hover:text-primary dark:hover:text-dmPrimary",onClick:()=>k(S),children:x(m1,{})}),x("button",{className:"hover:text-primary dark:hover:text-dmPrimary",onClick:()=>w(S),children:x(h1,{})})]}):X(kc,{children:[x("input",{type:"checkbox",className:`absolute -left-5  ${e=="Today"?"top-1.5":"top-1"}
                   border-1 rounded-md
             border-onSurface/[38%] dark:border-dmOnSurface/[38%]
             bg-background text-primary
