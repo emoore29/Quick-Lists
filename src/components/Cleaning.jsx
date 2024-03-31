@@ -2,48 +2,48 @@ import { CancelX } from "./svgs";
 import { useState, useEffect } from "react";
 import List from "./list";
 
-export default function Meals({ areMealsVisible, setAreMealsVisible }) {
-  const [meals, setMeals] = useState(() => {
-    const savedList = localStorage.getItem("Meals");
+export default function Cleaning({ isCleaningVisible, setIsCleaningVisible }) {
+  const [cleaning, setCleaning] = useState(() => {
+    const savedList = localStorage.getItem("Cleaning");
     if (savedList) {
       return JSON.parse(savedList);
     } else {
-      return ["Breakfasts", "Lunches", "Dinners", "Snacks"];
+      return ["Daily", "Weekly", "Monthly", "Occasionally"];
     }
   });
 
   // Saves meals to local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem("Meals", JSON.stringify(meals));
-  }, [meals]);
+    localStorage.setItem("Cleaning", JSON.stringify(cleaning));
+  }, [cleaning]);
 
-  function closeMeals() {
-    setAreMealsVisible(false);
+  function closeCleaning() {
+    setIsCleaningVisible(false);
   }
 
   return (
     <div
       id="secondaryLists"
       className={`${
-        areMealsVisible ? "" : "hidden"
+        isCleaningVisible ? "" : "hidden"
       } relative flex flex-col bg-surface dark:bg-dmSurface p-10 max-h-[1000px]  min-h-screen  w-full overflow-y-auto`}
     >
-      <h2 className="mb-5 text-center">Meals</h2>{" "}
+      <h2 className="mb-5 text-center">Cleaning</h2>{" "}
       <button
-        onClick={closeMeals}
-        aria-label="Close meals"
+        onClick={closeCleaning}
+        aria-label="Close cleaning"
         className="absolute top-0 right-0 m-5"
       >
         <CancelX />
       </button>
       <div className="columns-2 gap-5">
-        {meals &&
-          meals.map((cardName, index) => (
+        {cleaning &&
+          cleaning.map((cardName, index) => (
             <List
               key={cardName + index}
               index={index}
-              secondaryLists={meals}
-              setSecondaryLists={setMeals}
+              secondaryLists={cleaning}
+              setSecondaryLists={setCleaning}
               listName={cardName}
             />
           ))}

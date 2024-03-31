@@ -2,48 +2,51 @@ import { CancelX } from "./svgs";
 import { useState, useEffect } from "react";
 import List from "./list";
 
-export default function Goals({ areGoalsVisible, setAreGoalsVisible }) {
-  const [goals, setGoals] = useState(() => {
-    const savedList = localStorage.getItem("Goals");
+export default function DailyTasks({
+  areDailyTasksVisible,
+  setAreDailyTasksVisible,
+}) {
+  const [dailyTasks, setDailyTasks] = useState(() => {
+    const savedList = localStorage.getItem("Daily");
     if (savedList) {
       return JSON.parse(savedList);
     } else {
-      return ["Main"];
+      return ["Everyday"];
     }
   });
 
-  // Saves goals to local storage whenever it changes
+  // Saves daily tasks to local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem("Goals", JSON.stringify(goals));
-  }, [goals]);
+    localStorage.setItem("Daily", JSON.stringify(dailyTasks));
+  }, [dailyTasks]);
 
-  function closeGoals() {
-    setAreGoalsVisible(false);
+  function closeDailyTasks() {
+    setAreDailyTasksVisible(false);
   }
 
   return (
     <div
       id="goals"
       className={`${
-        areGoalsVisible ? "" : "hidden"
+        areDailyTasksVisible ? "" : "hidden"
       } relative flex flex-col bg-surface dark:bg-dmSurface p-10 max-h-[1000px]  min-h-screen  w-full overflow-y-auto`}
     >
-      <h2 className="mb-5 text-center">Goals</h2>{" "}
+      <h2 className="mb-5 text-center">Daily Tasks</h2>{" "}
       <button
-        onClick={closeGoals}
+        onClick={closeDailyTasks}
         aria-label="Close goals"
         className="absolute top-0 right-0 m-5"
       >
         <CancelX />
       </button>
       <div className="columns-2 gap-5">
-        {goals &&
-          goals.map((cardName, index) => (
+        {dailyTasks &&
+          dailyTasks.map((cardName, index) => (
             <List
               key={cardName + index}
               index={index}
-              secondaryLists={goals}
-              setSecondaryLists={setGoals}
+              secondaryLists={dailyTasks}
+              setSecondaryLists={setDailyTasks}
               listName={cardName}
             />
           ))}

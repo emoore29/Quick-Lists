@@ -8,11 +8,15 @@ import SecondaryLists from "./components/SecondaryLists";
 import List from "./components/list";
 import "./index.css";
 import {
+  CleaningIcon,
   FoodIcon,
   GoalsIcon,
   ListsIcon,
+  RepeatDailyIcon,
   ScheduleIcon,
 } from "./components/svgs";
+import DailyTasks from "./components/RepeatDaily";
+import Cleaning from "./components/Cleaning";
 
 function App() {
   const [areSecondaryListsVisible, setAreSecondaryListsVisible] =
@@ -20,6 +24,8 @@ function App() {
   const [areGoalsVisible, setAreGoalsVisible] = useState(false);
   const [areMealsVisible, setAreMealsVisible] = useState(false);
   const [isScheduleVisible, setIsScheduleVisible] = useState(false);
+  const [areDailyTasksVisible, setAreDailyTasksVisible] = useState(false);
+  const [isCleaningVisible, setIsCleaningVisible] = useState(false);
 
   function openSecondaryLists() {
     setAreSecondaryListsVisible(true);
@@ -33,6 +39,15 @@ function App() {
   }
   function openSchedule() {
     setIsScheduleVisible(true);
+  }
+
+  function setAllToFalse() {
+    setAreSecondaryListsVisible(false);
+    setAreGoalsVisible(false);
+    setAreMealsVisible(false);
+    setIsScheduleVisible(false);
+    setAreDailyTasksVisible(false);
+    setIsCleaningVisible(false);
   }
 
   return (
@@ -51,30 +66,63 @@ function App() {
           <Header />
           <List listName={"Today"} />
         </div>
-        <button
-          onClick={openSecondaryLists}
-          className={`m-5 flex items-center justify-center rounded-full w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary absolute top-0 right-0 `}
-        >
-          <ListsIcon />
-        </button>
-        <button
-          onClick={openGoals}
-          className={`m-5 rounded-full flex items-center justify-center  w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary absolute top-12 right-0 `}
-        >
-          <GoalsIcon />
-        </button>
-        <button
-          onClick={openMeals}
-          className={`m-5 rounded-full flex items-center justify-center w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary absolute top-24 right-0 `}
-        >
-          <FoodIcon />
-        </button>
-        <button
-          onClick={openSchedule}
-          className={`m-5  rounded-full flex items-center justify-center w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary absolute top-36 right-0 `}
-        >
-          <ScheduleIcon />
-        </button>
+        <div className="">
+          <button
+            onClick={() => {
+              setAllToFalse();
+              openSecondaryLists();
+            }}
+            className={`m-5 flex items-center justify-center rounded-full w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary `}
+          >
+            <ListsIcon />
+          </button>
+          <button
+            onClick={() => {
+              setAllToFalse();
+              openGoals();
+            }}
+            className={`m-5 rounded-full flex items-center justify-center  w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary`}
+          >
+            <GoalsIcon />
+          </button>
+          <button
+            onClick={() => {
+              setAllToFalse();
+              openMeals();
+            }}
+            className={`m-5 rounded-full flex items-center justify-center w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary `}
+          >
+            <FoodIcon />
+          </button>
+          <button
+            onClick={() => {
+              setAllToFalse();
+              openSchedule();
+            }}
+            className={`m-5  rounded-full flex items-center justify-center w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary`}
+          >
+            <ScheduleIcon />
+          </button>
+          <button
+            onClick={() => {
+              setAllToFalse();
+              setAreDailyTasksVisible(true);
+            }}
+            className={`m-5  rounded-full flex items-center justify-center w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary  `}
+          >
+            <RepeatDailyIcon />
+          </button>
+          <button
+            onClick={() => {
+              setAllToFalse();
+              setIsCleaningVisible(true);
+            }}
+            className={`m-5  rounded-full flex items-center justify-center w-10 h-10 text-background dark:text-dmBackground bg-primary dark:bg-dmPrimary `}
+          >
+            <CleaningIcon />
+          </button>
+        </div>
+
         <SecondaryLists
           areSecondaryListsVisible={areSecondaryListsVisible}
           setAreSecondaryListsVisible={setAreSecondaryListsVisible}
@@ -90,6 +138,14 @@ function App() {
         <ScheduleTab
           isScheduleVisible={isScheduleVisible}
           setIsScheduleVisible={setIsScheduleVisible}
+        />
+        <DailyTasks
+          areDailyTasksVisible={areDailyTasksVisible}
+          setAreDailyTasksVisible={setAreDailyTasksVisible}
+        />
+        <Cleaning
+          isCleaningVisible={isCleaningVisible}
+          setIsCleaningVisible={setIsCleaningVisible}
         />
       </div>
     </div>
