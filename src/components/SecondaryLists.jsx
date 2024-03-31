@@ -42,7 +42,7 @@ export default function SecondaryLists({
       id="secondaryLists"
       className={`${
         areSecondaryListsVisible ? "" : "hidden"
-      } relative flex flex-col bg-surface dark:bg-dmSurface p-10 max-h-[1000px] w-full overflow-y-auto`}
+      } relative flex flex-col bg-surface dark:bg-dmSurface p-10 max-h- w-full overflow-y-auto`}
     >
       <h2 className="mb-5 text-center">Secondary Lists</h2>{" "}
       <button

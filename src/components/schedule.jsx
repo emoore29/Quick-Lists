@@ -16,7 +16,7 @@ export default function Schedule() {
   }, []);
 
   return (
-    <div className="absolute bottom-0 left-0 text-xs">
+    <div className="text-xs mx-auto">
       <table>
         <caption>This week's schedule</caption>
         <thead>
