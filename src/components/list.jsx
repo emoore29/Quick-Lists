@@ -23,17 +23,19 @@ export default function List({
   const [updateItem, setUpdateItem] = useState(""); // string from an item in the list, set whenever user changes item
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
-  // Add today's work from this week's schedule to list items
+  // Add today's work from this week's schedule to today's items
   useEffect(() => {
-    let stored = false;
-    list.map((item) => {
-      if (item.text.startsWith("MDPI") || item.text.startsWith("VIQ")) {
-        stored = true;
-      }
-    });
+    let workAlreadyInList = false;
+    listName == "Today" &&
+      list.map((item) => {
+        if (item.text.startsWith("MDPI") || item.text.startsWith("VIQ")) {
+          workAlreadyInList = true;
+        }
+      });
 
-    if (!stored && listName == "Today") {
+    if (!workAlreadyInList && listName == "Today") {
       const mdpi = thisWeek[day]["mdpi"];
+      console.log("mdpi", mdpi);
 
       const viqArr = [];
       // loop through day, add key (e.g. "five_day") and the associated value if there is one
@@ -77,10 +79,6 @@ export default function List({
 
       setList([...list, ...workItems]);
     }
-  }, [day, listName]);
-
-  useEffect(() => {
-    console.log("test");
   }, [day, listName]);
 
   // Adds new item to list
@@ -179,7 +177,7 @@ export default function List({
       min-h-min w-1/4 
       `}
     >
-      <h2 className="text-left mb-2">{listName}</h2>
+      <h2 className="text-left mb-2">{listName !== "Goals" ? listName : ""}</h2>
       <ul
         className={`mb-8 font-light ${
           listName === "Today" ? "text-xl" : "text-md"
