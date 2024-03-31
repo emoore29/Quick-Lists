@@ -8,7 +8,7 @@ export default function Goals({ areGoalsVisible, setAreGoalsVisible }) {
     if (savedList) {
       return JSON.parse(savedList);
     } else {
-      return ["Goals"];
+      return ["Main"];
     }
   });
 

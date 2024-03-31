@@ -25,16 +25,17 @@ export default function List({
 
   // Add today's work from this week's schedule to today's items
   useEffect(() => {
-    let workAvailable = false;
+    let workAlreadyInList = false;
     listName == "Today" &&
       list.map((item) => {
         if (item.text.startsWith("MDPI") || item.text.startsWith("VIQ")) {
-          workAvailable = true;
+          workAlreadyInList = true;
         }
       });
 
-    if (!workAvailable && listName == "Today") {
+    if (!workAlreadyInList && listName == "Today") {
       const mdpi = thisWeek[day]["mdpi"];
+      console.log("mdpi", mdpi);
 
       const viqArr = [];
       // loop through day, add key (e.g. "five_day") and the associated value if there is one
@@ -78,10 +79,6 @@ export default function List({
 
       setList([...list, ...workItems]);
     }
-  }, [day, listName]);
-
-  useEffect(() => {
-    console.log("test");
   }, [day, listName]);
 
   // Adds new item to list
