@@ -204,6 +204,8 @@ export default function List({
               dark:focus:ring-offset-dmBackground
                 text-onSurface 
                dark:text-dmOnSurface
+            w-3/4
+               
                 font-roboto font-light ${
                   listName !== "Today"
                     ? "text-left dark:bg-dmRaisedSurface bg-surface"
@@ -213,6 +215,7 @@ export default function List({
                   defaultValue={item.text}
                   onChange={(e) => setUpdateItem(e.target.value)}
                 />
+
                 <button
                   className="hover:text-primary dark:hover:text-dmPrimary"
                   type="submit"
@@ -226,7 +229,7 @@ export default function List({
                   <CancelX />
                 </button>
                 <button
-                  className="ml-2 hover:text-primary dark:hover:text-dmPrimary"
+                  className=" hover:text-primary dark:hover:text-dmPrimary"
                   onClick={() => handleDelete(index)}
                 >
                   <Delete />
