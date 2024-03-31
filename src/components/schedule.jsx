@@ -8,7 +8,7 @@ export default function Schedule() {
 
   useEffect(() => {
     const today = new Date();
-
+    // Capitalise file
     // Convert todaysDate to a string in the format "YYYY-MM-DD"
     const formattedDate = today.toISOString().split("T")[0];
 
