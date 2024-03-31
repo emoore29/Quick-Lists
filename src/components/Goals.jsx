@@ -26,7 +26,7 @@ export default function Goals({ areGoalsVisible, setAreGoalsVisible }) {
       id="goals"
       className={`${
         areGoalsVisible ? "" : "hidden"
-      } relative flex flex-col bg-surface dark:bg-dmSurface p-10 max-h- w-full overflow-y-auto`}
+      } relative flex flex-col bg-surface dark:bg-dmSurface p-10 max-h-[1000px] w-full overflow-y-auto`}
     >
       <h2 className="mb-5 text-center">Goals</h2>{" "}
       <button
