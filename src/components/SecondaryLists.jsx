@@ -38,11 +38,11 @@ export default function SecondaryLists({
   }
 
   return (
-    <section
+    <div
       id="secondaryLists"
       className={`${
         areSecondaryListsVisible ? "" : "hidden"
-      } relative flex flex-col bg-surface dark:bg-dmSurface p-10 h-full w-full min-w-min min-h-screen `}
+      } relative flex flex-col bg-surface dark:bg-dmSurface p-10 max-h-[1000px] w-full overflow-y-auto`}
     >
       <h2 className="mb-5 text-center">Secondary Lists</h2>{" "}
       <button
@@ -100,6 +100,6 @@ export default function SecondaryLists({
           </form>
         )}
       </div>
-    </section>
+    </div>
   );
 }

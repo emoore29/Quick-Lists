@@ -17,12 +17,12 @@ function App() {
   return (
     <div
       data-theme="pink"
-      className="h-full font-poppins min-h-screen
+      className="h-full font-poppins min-h-screen 
       bg-background dark:bg-dmBackground 
       text-onBackground dark:text-dmOnBackground/[87%]
       "
     >
-      <div className="flex w-full h-full  min-h-screen">
+      <div className="flex w-full h-full min-h-screen">
         <Schedule />
         <div
           id="primary-container"
@@ -37,6 +37,7 @@ function App() {
         >
           +
         </button>
+
         <SecondaryLists
           areSecondaryListsVisible={areSecondaryListsVisible}
           setAreSecondaryListsVisible={setAreSecondaryListsVisible}
