@@ -177,7 +177,9 @@ export default function List({
       min-h-min w-1/4 
       `}
     >
-      <h2 className="text-left mb-2">{listName !== "Goals" ? listName : ""}</h2>
+      <h2 className="text-left mb-2">
+        {typeof listName === "string" ? listName : "List name not string"}
+      </h2>
       <ul
         className={`mb-8 font-light ${
           listName === "Today" ? "text-xl" : "text-md"
